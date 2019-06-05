@@ -1,10 +1,7 @@
 package application;
 
-
 import javafx.stage.*;
-
 import java.net.URL;
-
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
@@ -18,8 +15,10 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
+import Data.*;
 
 public class LoginMenu {
+
 	private double sizeX;
 	private double sizeY;
 	private double positionX;
@@ -32,31 +31,30 @@ public class LoginMenu {
 	private TextField password;
 	private Text warning = new Text("");
 	private Button login;
-	private Button signup;	
+	private Button signup;
 	private Stage stage;
 	private Scene scene;
-	
+	Database localData;
 
 	public LoginMenu(double _sizeX, double _sizeY, double _positionX, double _positionY) {
-		
+
 		sizeX = _sizeX;
 		sizeY = _sizeY;
 		positionX = _positionX;
-		positionY = _positionY;		
-		
+		positionY = _positionY;
+
 		buildUpStage();
-	
+
 	}
-	
-	//creates the scene and all elements, adds to stage and shows it
+
+	// creates the scene and all elements, adds to stage and shows it
 	private void buildUpStage() {
-		stage = new Stage();			
+		stage = new Stage();
 		stage.setX(positionX);
 		stage.setY(positionY);
 		stage.setTitle("Practice Management - Login Screen");
 
-		
-		//Hbox login details setup
+		// Hbox login details setup
 		loginDetails = new VBox();
 		Text loginPrompt = new Text("Please enter you login details or\nsign up now so you can use the app.");
 		username = new TextField();
@@ -69,22 +67,20 @@ public class LoginMenu {
 		HBox buttonArea = new HBox();
 		login = new Button("Login");
 		login.setOnAction(loginAction);
-		signup= new Button("Signup");
+		signup = new Button("Signup");
 		buttonArea.setAlignment(Pos.CENTER);
 		buttonArea.setSpacing(20);
 		buttonArea.getChildren().addAll(login, signup);
 		warning.setFill(Color.RED);
 		loginDetails.getChildren().addAll(loginPrompt, username, password, warning, buttonArea);
 		loginDetails.setAlignment(Pos.CENTER);
-		
-		//content borderpane setup
-		content = new BorderPane();
-		content.setStyle("-fx-background-color: rgb(245, 245, 245)");		
-		content.setCenter(loginDetails);
-		
-	
 
-		//setup custom resize and move fucntions
+		// content borderpane setup
+		content = new BorderPane();
+		content.setStyle("-fx-background-color: rgb(245, 245, 245)");
+		content.setCenter(loginDetails);
+
+		// setup custom resize and move fucntions
 		stage.setHeight(sizeY);
 		stage.setMinHeight(sizeY);
 		stage.setMaxHeight(sizeY);
@@ -92,38 +88,53 @@ public class LoginMenu {
 		stage.setMaxWidth(sizeX);
 		stage.setMinWidth(sizeX);
 
-	
-		//setup and show scene
-		scene = new Scene(content,sizeX,sizeY);
+		// setup and show scene
+		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-		
+
+		// setup data
+		localData = new Database();
+		localData.initialize();
+
 	}
 
-	
-	//Login button action
-	EventHandler<ActionEvent> loginAction = new EventHandler<ActionEvent>(){
-		@Override 
-		public void handle(ActionEvent e){
-			if(username.getText().length() < 6) {
+	// Login button action
+	EventHandler<ActionEvent> loginAction = new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+			if (username.getText().length() < 6) {
 				username.setStyle("-fx-text-box-border: red;-fx-focus-color: red ;");
 				warning.setText("Invalid username! Try again!");
-				
-			}
-			else if(password.getText().length() < 6) {
+
+			} else if (password.getText().length() < 6) {
 				password.setStyle("-fx-text-box-border: red;-fx-focus-color: red ;");
 				warning.setText("Invalid password! Try again!");
-				
-			}
-			else {
-				try{
-					MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), username.getText());
-				}catch(Exception e1) {
-					e1.printStackTrace();
-				}
-				stage.close();
-				
 
+			} else {
+				boolean found = false;
+				Member theMember = null;
+				for (Member member : localData.getMembers()) {
+					if (username.getText().equals(member.getUsername())) {
+						found = true;
+						theMember = member;
+						break;
+					}
+				}
+				if (!found) {
+					warning.setText("Invalid Username! Try again!");
+
+				} else if (!theMember.getPassword().equals(password.getText())) {
+					warning.setText("Invalid Password! Try again!");
+				} else {
+					try {
+						MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), 
+								stage.getY(), theMember);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					stage.close();
+				}
 			}
 		}
 	};

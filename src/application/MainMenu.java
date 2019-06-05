@@ -1,9 +1,8 @@
 package application;
 
 import javafx.stage.*;
-
 import java.net.URL;
-
+import Data.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
@@ -21,9 +20,7 @@ public class MainMenu {
 	private double sizeX;
 	private double sizeY;
 	private double positionX;
-	private double positionY;
-	private double xOffset;
-	private double yOffset;
+	private double positionY;	
 	private BorderPane content;
 	private VBox buttonArea;
 	private HBox patientFind;
@@ -34,9 +31,9 @@ public class MainMenu {
 	private Stage stage;
 	private Text usersName;
 	private Scene scene;
-	private String user;
+	private Member user;
 
-	public MainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, String _user) {
+	public MainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Member _user) {
 		
 		sizeX = _sizeX;
 		sizeY = _sizeY;
@@ -71,7 +68,7 @@ public class MainMenu {
 		//containing a VBox of all the buttons 
 		content = new BorderPane();
 		buttonArea = new VBox();
-		usersName = new Text(user);
+		usersName = new Text(user.getName());
 		HBox topArea = new HBox();
 		HBox centering = new HBox();
 		topArea.getChildren().addAll(usersName);

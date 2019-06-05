@@ -2,9 +2,8 @@ package application;
 
 
 import javafx.stage.*;
-
 import java.net.URL;
-
+import Data.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
@@ -35,9 +34,9 @@ public class MyPatients {
 	private Button signup;	
 	private Stage stage;
 	private Scene scene;
-	private String user;
+	private Member user;
 
-	public MyPatients(double _sizeX, double _sizeY, double _positionX, double _positionY, String _user) {
+	public MyPatients(double _sizeX, double _sizeY, double _positionX, double _positionY, Member _user) {
 		
 		user = _user;
 		sizeX = _sizeX;
@@ -54,46 +53,35 @@ public class MyPatients {
 		stage = new Stage();			
 		stage.setX(positionX);
 		stage.setY(positionY);
-		stage.setTitle("Practice Management - My patients");
-
-		
-		//Hbox login details setup
-		loginDetails = new VBox();
-		Text loginPrompt = new Text("Please enter you login details or\nsign up now so you can use the app.");
-		username = new TextField();
-		username.setPromptText("Username");
-		username.setMaxWidth(150);
-
-		password = new TextField();
-		password.setPromptText("Password");
-		password.setMaxWidth(150);
-//		password.setAlignment(Pos.TOP_CENTER);
-		HBox buttonArea = new HBox();
-		login = new Button("Login");
-		login.setOnAction(loginAction);
-		signup= new Button("Signup");
-		buttonArea.setAlignment(Pos.CENTER);
-		buttonArea.setSpacing(20);
-		buttonArea.getChildren().addAll(login, signup);
-		warning.setFill(Color.RED);
-		loginDetails.getChildren().addAll(loginPrompt, username, password, warning, buttonArea);
-		loginDetails.setAlignment(Pos.CENTER);
-		
-		//content borderpane setup
-		content = new BorderPane();
-		content.setStyle("-fx-background-color: rgb(245, 245, 245)");		
-		content.setCenter(loginDetails);
-		
-	
-
-		//setup custom resize and move fucntions
 		stage.setHeight(sizeY);
 		stage.setMinHeight(sizeY);
 		stage.setMaxHeight(sizeY);
 		stage.setWidth(sizeX);
 		stage.setMaxWidth(sizeX);
 		stage.setMinWidth(sizeX);
+		stage.setTitle("Practice Management - My patients");
 
+		//Assigned font for all texts
+		Font overall = Font.font("Aral", 20);
+		
+		content = new BorderPane();
+		VBox buttonArea = new VBox();
+		Text usersName = new Text(user.getName());
+		HBox topArea = new HBox();
+		HBox centering = new HBox();
+		topArea.getChildren().addAll(usersName);
+		content.setTop(topArea);
+		content.setCenter(centering);
+		centering.getChildren().add(buttonArea);
+		
+		centering.setAlignment(Pos.CENTER);
+		topArea.setStyle("-fx-background-color: rgb(250, 250, 250)");
+		centering.setStyle("-fx-background-color: rgb(230, 238, 242)");
+		usersName.setFont(overall);
+		
+		
+		
+		
 	
 		//setup and show scene
 		scene = new Scene(content,sizeX,sizeY);
@@ -101,32 +89,6 @@ public class MyPatients {
 		stage.show();
 		
 	}
-
 	
-	//Login button action
-	EventHandler<ActionEvent> loginAction = new EventHandler<ActionEvent>(){
-		@Override 
-		public void handle(ActionEvent e){
-			if(username.getText().length() < 6) {
-				username.setStyle("-fx-text-box-border: red;-fx-focus-color: red ;");
-				warning.setText("Invalid username! Try again!");
-				
-			}
-			else if(password.getText().length() < 6) {
-				password.setStyle("-fx-text-box-border: red;-fx-focus-color: red ;");
-				warning.setText("Invalid password! Try again!");
-				
-			}
-			else {
-				try{
-					MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), username.getText());
-				}catch(Exception e1) {
-					e1.getMessage();
-				}
-				stage.close();
-				
 
-			}
-		}
-	};
 }
