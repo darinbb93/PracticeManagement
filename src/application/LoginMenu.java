@@ -58,7 +58,7 @@ public class LoginMenu {
 		
 		//Hbox login details setup
 		loginDetails = new VBox();
-		Text loginPrompt = new Text("Please enter you login ndetails or\nsign up now so you can use the app.");
+		Text loginPrompt = new Text("Please enter you login details or\nsign up now so you can use the app.");
 		username = new TextField();
 		username.setPromptText("Username");
 		username.setMaxWidth(150);
