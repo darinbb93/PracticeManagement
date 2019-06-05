@@ -43,7 +43,13 @@ public class MainMenu {
 		positionX = _positionX;
 		positionY = _positionY;		
 		user = _user;
-
+		
+		buildUpStage();
+		
+		}
+		
+		//creates the scene and all elements, adds to stage and shows it
+		private void buildUpStage() {
 		//Stage setup
 		stage = new Stage();			
 		stage.setX(positionX);
@@ -92,6 +98,7 @@ public class MainMenu {
 		Text myPTXT = new Text("My Patients");
 		myPTXT.setFont(overall);
 		myPatients.getChildren().addAll(myPIMG_VIEW, myPTXT);
+		myPatients.setOnMouseClicked(myPatientsClick);
 
 		//Patient Find
 		patientFind =  new HBox();		
@@ -289,16 +296,21 @@ public class MainMenu {
 //		}
 //	};
 //
-//	//CUSTOM RIGHT CLICK MENU
-//	EventHandler<MouseEvent> rightClick = new EventHandler<MouseEvent>() {
-//		@Override 
-//		public void handle(MouseEvent e) {
-//			if(e.getButton() == MouseButton.SECONDARY) {
-//				rightClickMenu.show(content, e.getScreenX(), e.getScreenY());;
-//			}
-//
-//		}
-//	};
+	//My patients setup mouse click
+	EventHandler<MouseEvent> myPatientsClick = new EventHandler<MouseEvent>() {
+		@Override 
+		public void handle(MouseEvent e) {
+			if(e.getButton() == MouseButton.PRIMARY) {
+				try {
+					MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
+							}
+				catch(Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
 
 //	//MOVE WINDOW HANDLERS
 //	EventHandler<MouseEvent> clickContent = new EventHandler<MouseEvent>() {	

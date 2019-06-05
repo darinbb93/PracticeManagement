@@ -19,7 +19,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
-public class LoginMenu {
+public class MyPatients {
 	private double sizeX;
 	private double sizeY;
 	private double positionX;
@@ -35,10 +35,11 @@ public class LoginMenu {
 	private Button signup;	
 	private Stage stage;
 	private Scene scene;
-	
+	private String user;
 
-	public LoginMenu(double _sizeX, double _sizeY, double _positionX, double _positionY) {
+	public MyPatients(double _sizeX, double _sizeY, double _positionX, double _positionY, String _user) {
 		
+		user = _user;
 		sizeX = _sizeX;
 		sizeY = _sizeY;
 		positionX = _positionX;
@@ -53,7 +54,7 @@ public class LoginMenu {
 		stage = new Stage();			
 		stage.setX(positionX);
 		stage.setY(positionY);
-		stage.setTitle("Practice Management - Login Screen");
+		stage.setTitle("Practice Management - My patients");
 
 		
 		//Hbox login details setup
@@ -66,6 +67,7 @@ public class LoginMenu {
 		password = new TextField();
 		password.setPromptText("Password");
 		password.setMaxWidth(150);
+//		password.setAlignment(Pos.TOP_CENTER);
 		HBox buttonArea = new HBox();
 		login = new Button("Login");
 		login.setOnAction(loginAction);
@@ -119,7 +121,7 @@ public class LoginMenu {
 				try{
 					MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), username.getText());
 				}catch(Exception e1) {
-					e1.printStackTrace();
+					e1.getMessage();
 				}
 				stage.close();
 				
