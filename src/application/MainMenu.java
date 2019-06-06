@@ -32,7 +32,8 @@ public class MainMenu {
 	private Text usersName;
 	private Scene scene;
 	private Practitioner user;
-
+	URL imgURL;
+	
 	public MainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Practitioner _user) {
 
 		sizeX = _sizeX;
@@ -82,8 +83,6 @@ public class MainMenu {
 		usersName.setFont(overall);
 
 //Buttons setup as HBox with an image component and Text 
-
-		URL imgURL;
 
 		// My Patient
 		myPatients = new HBox();

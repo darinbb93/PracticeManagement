@@ -1,41 +1,26 @@
 package application;
 
-import javafx.stage.*;
-import java.net.URL;
 import Data.*;
+import javafx.stage.*;
+import javafx.util.Callback;
+import java.net.URL;
 import javafx.event.*;
-import javafx.geometry.*;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 public class MyPatients {
 	private double sizeX;
 	private double sizeY;
 	private double positionX;
-	private double positionY;
-	private double xOffset;
-	private double yOffset;
-	private BorderPane content;
-	private VBox loginDetails;
-	private TextField username;
-	private TextField password;
-	private Text warning = new Text("");
-	private Button login;
-	private Button signup;
-	private Stage stage;
+	private double positionY;	
 	private Scene scene;
+	private Stage stage;
 	private Practitioner user;
-	ListView<Patient> patientsList;
-
+	private ListView<Patient> patientsList;
+	private MyPatients self = this;
+	
 	public MyPatients(double _sizeX, double _sizeY, double _positionX, double _positionY, Practitioner _user) {
 
 		user = _user;
@@ -65,25 +50,29 @@ public class MyPatients {
 		Font overall = Font.font("Aral", 20);
 
 		// initialising components
-		content = new BorderPane();
+		BorderPane content = new BorderPane();
 		VBox patients = new VBox();
 		Text usersName = new Text(user.getName());
 //		VBox topAreaV = new VBox();
 		BorderPane nameNbuttons = new BorderPane();
 		BorderPane backBtnContainer = new BorderPane();
 		Button back = new Button();
-		patientsList = new ListView<>();
-
+		patientsList = new ListView<Patient>();
+		BorderPane addViewButtons = new BorderPane();
+		Button view = new Button();
+		Button addExist = new Button();
+		addViewButtons.setLeft(view);
+		addViewButtons.setRight(addExist);
 		// layout consists of a main border pane "content" ON TOP
 		// it has a VBOX inside is an HBOX with name and buttons
 		// then the border pane with back button
 		nameNbuttons.setLeft(usersName);
 //		topAreaV.getChildren().addAll(nameNbuttons, backBtnContainer);
 		content.setTop(nameNbuttons);
-		patients.getChildren().addAll(backBtnContainer, patientsList);
+		patients.getChildren().addAll(backBtnContainer, patientsList, addViewButtons);
 		content.setCenter(patients);
 
-		// back button setup
+		// setup buttons
 		URL imgURL = getClass().getResource("back.png");
 		backBtnContainer.setLeft(back);
 		back.setMinSize(70, 30);
@@ -91,17 +80,39 @@ public class MyPatients {
 				+ "  -fx-background-position: center; -fx-background-size: 68px 24px; ");
 		back.setOnAction(backClick);
 
+		view.setText("View");
+		view.setOnAction(viewClick);
+		addExist.setText("Add Existing");
+		
+		
 		// centering.setAlignment(Pos.CENTER);
 		nameNbuttons.setStyle("-fx-background-color: rgb(250, 250, 250)");
 		patients.setStyle("-fx-background-color: rgb(230, 238, 242)");
 		usersName.setFont(overall);
-
+		
+		//Populating and setting display name for ListView of patients
+		patientsList.setCellFactory(new Callback<ListView<Patient>, ListCell<Patient>>() {
+		    @Override
+		    public ListCell<Patient> call(ListView<Patient> param) {
+		         ListCell<Patient> cell = new ListCell<Patient>() {
+		             @Override
+		            protected void updateItem(Patient item, boolean empty) {
+		                super.updateItem(item, empty);
+		                if(item != null) {
+		                    setText(item.getName());
+		                } else {
+		                    setText(null);
+		                }
+		            }
+		         };
+		        return cell;
+		    }
+		});
 		for (Patient patient : user.getPatients()) {
 			patientsList.getItems().add(patient);
 
 		}
 
-//		patientsList.getItems().
 
 		// setup and show scene
 		scene = new Scene(content, sizeX, sizeY);
@@ -110,6 +121,14 @@ public class MyPatients {
 
 	}
 
+	
+	//show stage
+	public void showStage(double _positionX, double _positionY) {
+		positionX = _positionX;
+		positionY = _positionY;
+		buildUpStage();
+	}
+	
 	// Back button click setup
 	EventHandler<ActionEvent> backClick = new EventHandler<ActionEvent>() {
 		@Override
@@ -121,6 +140,20 @@ public class MyPatients {
 				e2.printStackTrace();
 			}
 		}
-
+		
+	};
+	
+	EventHandler<ActionEvent> viewClick = new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+			try {
+				PatientView mainMenu = new PatientView(sizeX, sizeY, 
+						stage.getX(), stage.getY(), patientsList.getSelectionModel().getSelectedItem(), self);
+				stage.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
 	};
 }
