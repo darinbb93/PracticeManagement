@@ -16,7 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
-public class PatientView {
+public class PatientOptionsMenu {
 	private double sizeX;
 	private double sizeY;
 	private double positionX;
@@ -26,8 +26,9 @@ public class PatientView {
 	private Patient user;
 	private MyPatients prevMenu;
 	URL imgURL;
+	PatientOptionsMenu self = this;
 
-	public PatientView(double _sizeX, double _sizeY, double _positionX, double _positionY, Patient _user,
+	public PatientOptionsMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Patient _user,
 			MyPatients _prevMenu) {
 
 		sizeX = _sizeX;
@@ -73,7 +74,7 @@ public class PatientView {
 		subContent.setCenter(centering);
 		centering.getChildren().add(patientOptions);
 		addViewButtons.setLeft(view);
-		addViewButtons.setRight(addExist);		
+		addViewButtons.setRight(addExist);
 		nameNbuttons.setLeft(usersName);
 		content.setTop(nameNbuttons);
 		content.setCenter(subContent);
@@ -112,7 +113,7 @@ public class PatientView {
 		tPlanTXT.setFont(overall);
 		tPlan.getChildren().addAll(tPlanIMG_VIEW, tPlanTXT);
 		tPlan.setOnMouseClicked(tPlanClick);
-		
+
 		// time Table
 		HBox info = new HBox();
 		imgURL = getClass().getResource("info50.png");
@@ -122,9 +123,8 @@ public class PatientView {
 		infoTXT.setFont(overall);
 		info.getChildren().addAll(infoIMG_VIEW, infoTXT);
 		info.setOnMouseClicked(infoClick);
-		
-		
-		//adding content to center of content border pane
+
+		// adding content to center of content border pane
 		patientOptions.getChildren().addAll(equipment, tPlan, info);
 
 //		buttonArea.setLeft(patientFind);
@@ -177,6 +177,13 @@ public class PatientView {
 //		region.setStyle( "-fx-background-color: rgb(253, 253, 201)" );
 	}
 
+	// show stage
+	public void showStage(double _positionX, double _positionY) {
+		positionX = _positionX;
+		positionY = _positionY;
+		buildUpStage();
+	}
+
 	// Back button click setup
 	EventHandler<ActionEvent> backClick = new EventHandler<ActionEvent>() {
 		@Override
@@ -206,14 +213,31 @@ public class PatientView {
 
 		}
 	};
-	
+
 	// Equipment setup mouse click
 	EventHandler<MouseEvent> equipmentClick = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent e) {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				try {
-//						MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
+					stage.close();
+					EquipmentView equipmentMenu = new EquipmentView(sizeX, sizeY, stage.getX(), stage.getY(), user,
+							self);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
+
+	// Patient Details mouse click
+	EventHandler<MouseEvent> infoClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+//							MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
 					stage.close();
 				} catch (Exception e2) {
 					e2.printStackTrace();
@@ -222,20 +246,4 @@ public class PatientView {
 
 		}
 	};
-	
-	//  Patient Details mouse click
-		EventHandler<MouseEvent> infoClick = new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				if (e.getButton() == MouseButton.PRIMARY) {
-					try {
-//							MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
-						stage.close();
-					} catch (Exception e2) {
-						e2.printStackTrace();
-					}
-				}
-
-			}
-		};
 }

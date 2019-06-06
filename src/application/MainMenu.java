@@ -33,7 +33,7 @@ public class MainMenu {
 	private Scene scene;
 	private Practitioner user;
 	URL imgURL;
-	
+
 	public MainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Practitioner _user) {
 
 		sizeX = _sizeX;
@@ -63,10 +63,7 @@ public class MainMenu {
 		// Assigned font for all texts
 		Font overall = Font.font("Aral", 20);
 
-		// setup layout having a border pane with top containing
-		// an HBox which displays username, more and help button
-		// then center Using an HBox to center content horizontally
-		// containing a VBox of all the buttons
+		
 		content = new BorderPane();
 		buttonArea = new VBox();
 		usersName = new Text(user.getName());
@@ -176,121 +173,19 @@ public class MainMenu {
 		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-		// following code must remain below "stage.show()" in order to properly
-		// modify background color for the "textArea" casting it to a "Region"
-//		Region region = (Region) textArea.lookup(".content");
-//		region.setStyle( "-fx-background-color: rgb(253, 253, 201)" );
+		
 	}
 
 	// EVENT HANDLERS
 
-//	//NEW NOTE BUTTON FUNCTION
-//	EventHandler<ActionEvent> newButton = new EventHandler<ActionEvent>(){
-//		@Override 
-//		public void handle(ActionEvent e){
-//			double newX = stage.getX() + stage.getWidth();
-//			double newY = stage.getY();
-//			Rectangle2D screen = Screen.getPrimary().getVisualBounds();
-//			if(stage.getX() + stage.getWidth()*2 > screen.getWidth()){
-//				newX = 0;
-//				newY = stage.getY() + stage.getHeight();
-//			}
-//			new MainMenu(sizeX,sizeY,newX,newY);
-//		}
-//	};
-//
-//
-//	//CUSTOM CLOSE BUTTON
-//	EventHandler<ActionEvent> closeButton = new EventHandler<ActionEvent>(){
-//		@Override 
-//		public void handle(ActionEvent e){
-//			stage.close();
-//		}
-//	};
-//
-//
-//	//PASTE FUNCTION
-//	EventHandler<ActionEvent> pasteButton = new EventHandler<ActionEvent>(){
-//		@Override 
-//		public void handle(ActionEvent e){
-//			if(Clipboard.getSystemClipboard().hasString()){
-//				textArea.insertText(textArea.getCaretPosition(),(String)Clipboard.getSystemClipboard().getContent(DataFormat.PLAIN_TEXT));
-//			}
-//		}
-//	};
-//
-//
-//	//COPYING FUNCTION
-//	EventHandler<ActionEvent> copyButton = new EventHandler<ActionEvent>(){
-//		@Override 
-//		public void handle(ActionEvent e){
-//			if(!textArea.getSelectedText().isEmpty()){
-//				final Clipboard clipboard = Clipboard.getSystemClipboard();
-//				final ClipboardContent content = new ClipboardContent();
-//				content.putString(textArea.getSelectedText());
-//				clipboard.setContent(content);
-//			}
-//			else {
-//				final Clipboard clipboard = Clipboard.getSystemClipboard();
-//				final ClipboardContent content = new ClipboardContent();
-//				content.putString(textArea.getText());
-//				clipboard.setContent(content);
-//			}
-//		}
-//	};
-//
-//	//CUTTING FUNCITON
-//	EventHandler<ActionEvent> cutButton = new EventHandler<ActionEvent>(){
-//		@Override 
-//		public void handle(ActionEvent e){
-//			if(!textArea.getSelectedText().isEmpty()){
-//				final Clipboard clipboard = Clipboard.getSystemClipboard();
-//				final ClipboardContent content = new ClipboardContent();
-//				content.putString(textArea.getSelectedText());
-//				clipboard.setContent(content);
-//				textArea.replaceSelection("");
-//			}
-//			else {
-//				final Clipboard clipboard = Clipboard.getSystemClipboard();
-//				final ClipboardContent content = new ClipboardContent();
-//				content.putString(textArea.getText());
-//				clipboard.setContent(content);
-//				textArea.clear();
-//			}
-//		}
-//	};
-//
-//	//ABOUT INFO MENU
-//	EventHandler<ActionEvent> aboutButton = new EventHandler<ActionEvent>(){
-//		@Override 
-//		public void handle(ActionEvent e) {
-//			Alert about = new Alert(AlertType.INFORMATION);
-//			about.setHeaderText("Post-It Note");
-//			GridPane contents = new GridPane();
-//			URL imgURL = getClass().getResource("darin.jpg");
-//			Image image = new Image(imgURL.toString()); 
-//			//			Image image = new Image("darin.jpg")// Why did that not work for me? also tried "../darin.jpg" "/darin.jpg" etc
-//			ImageView imgView = new ImageView(image);
-//			Label infoText = new Label("Digital Post-It Note using JavaFX\n"
-//					+ "Version 1.0\n"
-//					+ "Author: Darin Bogdanov\n"
-//					+ "Copyright(c) 2019");
-//			contents.add(imgView, 0, 0);
-//			contents.add(infoText, 1, 0);
-//			about.getDialogPane().setContent(contents);
-//			about.show();
-//
-//		}
-//	};
-//
 	// My patients setup mouse click
 	EventHandler<MouseEvent> myPatientsClick = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent e) {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				try {
-					MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
 					stage.close();
+					MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
@@ -298,112 +193,5 @@ public class MainMenu {
 
 		}
 	};
-
-//	//MOVE WINDOW HANDLERS
-//	EventHandler<MouseEvent> clickContent = new EventHandler<MouseEvent>() {	
-//		@Override
-//		public void handle(MouseEvent event) {
-//			scene.setCursor(Cursor.MOVE);
-//			xOffset = event.getSceneX();
-//			yOffset = event.getSceneY();
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> dragContent = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			stage.setX(event.getScreenX() - xOffset);
-//			stage.setY(event.getScreenY() - yOffset);
-//		}
-//	};
-//
-//
-//	//RESIZING HANDLERS
-//	EventHandler<MouseEvent> clickResizeXY = new EventHandler<MouseEvent>() {	
-//		@Override
-//		public void handle(MouseEvent event) {
-//			xOffset = event.getSceneX();
-//			yOffset = event.getSceneY();
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> dragResizeXY = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			double newX = event.getSceneX();
-//			double newY = event.getSceneY();
-//
-//			if(newX - xOffset != 0 && event.getSceneX() > sizeX)
-//				stage.setWidth(newX - xOffset + event.getSceneX());
-//			if(newY - yOffset != 0 && event.getSceneY() > sizeY)
-//				stage.setHeight(newY - yOffset + event.getSceneY());
-//
-//			yOffset = newY;
-//			xOffset = newX;
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> clickResizeX = new EventHandler<MouseEvent>() {	
-//		@Override
-//		public void handle(MouseEvent event) {
-//			xOffset = event.getSceneX();
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> dragResizeX = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			double newX = event.getSceneX();
-//			if(newX - xOffset != 0 && event.getSceneX() > sizeX)
-//				stage.setWidth(newX - xOffset + event.getSceneX());			
-//			xOffset = newX;
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> clickResizeY = new EventHandler<MouseEvent>() {	
-//		@Override
-//		public void handle(MouseEvent event) {
-//			yOffset = event.getSceneY();
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> dragResizeY = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			double newY = event.getSceneY();
-//			if(newY - yOffset != 0 && event.getSceneY() > sizeY)
-//				stage.setHeight(newY - yOffset + event.getSceneY());			
-//			yOffset = newY;			
-//		}
-//	};
-//
-//
-//	EventHandler<MouseEvent> hoverY = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			scene.setCursor(Cursor.S_RESIZE);
-//		}
-//	};
-//
-//
-//	EventHandler<MouseEvent> hoverX = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			scene.setCursor(Cursor.E_RESIZE);
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> hoverXY = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			scene.setCursor(Cursor.SE_RESIZE);
-//		}
-//	};
-//
-//	EventHandler<MouseEvent> hoverExit = new EventHandler<MouseEvent>() {   
-//		@Override
-//		public void handle(MouseEvent event) {
-//			scene.setCursor(Cursor.DEFAULT);
-//		}
-//	};
+	
 }

@@ -154,8 +154,38 @@ public class Database {
 		for(Practitioner doctor: practitioners) {
 			for(Patient patient : patients) {
 				doctor.getPatients().add(patient);
-
-			}
+			}			
 		}
+		
+		
+		//add equipment
+		Equipment e1 = new Equipment("Excercise/fitness ball", "ID0001", "Cortex", "C3000");
+		equipmentOwned.add(e1);
+		
+		Equipment e2 = new Equipment("Heart Monitor", "ID0002", "Sony", "S-HM300");
+		equipmentOwned.add(e2);
+		
+		Equipment e3 = new Equipment("Professional Cupping Therapy Equipment Set", "ID0003", "Hansol", "BU-HANG");
+		equipmentOwned.add(e3);
+		
+		Equipment e4 = new Equipment("3 in one TENS, EMS and MASSAGE Combo Unit ", "ID0004", "Caremax", "RC3");
+		equipmentOwned.add(e4);
+		
+		Equipment e5 = new Equipment("COMBO STIM+ Tens MACHINE 2 in 1unit", "ID0005", "PHYSIO", "EV-806P");
+		equipmentOwned.add(e5);
+		
+		Equipment e6 = new Equipment("Medical Easy On PC Based Spirometer", "ID0006", "NDD", "AG");
+		equipmentOwned.add(e6);
+		
+		Equipment e7 = new Equipment("Automatic External Defibrillator (AED)", "ID0007", "CardiacScience", "G3Plus");
+		equipmentOwned.add(e7);
+		
+		Equipment e8 = new Equipment("Short Moon Boot Cam-Walker ", "ID0008", "AlcareOrtho", "AOSM-3");
+		equipmentOwned.add(e8);
+		
+		Equipment e9 = new Equipment("Seat Walker Territory 130kg", "ID0009", "CareQuip", "c1a187");
+		equipmentOwned.add(e9);
+		
+		
 	}
 }

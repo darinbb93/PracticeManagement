@@ -34,8 +34,8 @@ public class LoginMenu {
 	private Button signup;
 	private Stage stage;
 	private Scene scene;
-	Database localData;
 
+	
 	public LoginMenu(double _sizeX, double _sizeY, double _positionX, double _positionY) {
 
 		sizeX = _sizeX;
@@ -92,11 +92,7 @@ public class LoginMenu {
 		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-
-		// setup data
-		localData = new Database();
-		localData.initialize();
-
+		
 	}
 
 	// Login button action
@@ -114,7 +110,7 @@ public class LoginMenu {
 			} else {
 				boolean found = false;
 				Practitioner theMember = null;
-				for (Member member : localData.getMembers()) {
+				for (Member member : PracticeInterface.database.getMembers()) {
 					if (username.getText().equals(member.getUsername())) {
 						found = true;
 						try{
@@ -133,12 +129,13 @@ public class LoginMenu {
 					warning.setText("Invalid Password! Try again!");
 				} else {
 					try {
+						stage.close();
 						MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), 
 								stage.getY(), theMember);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-					stage.close();
+					
 				}
 			}
 		}

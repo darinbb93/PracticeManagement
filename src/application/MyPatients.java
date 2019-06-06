@@ -53,7 +53,8 @@ public class MyPatients {
 		BorderPane content = new BorderPane();
 		VBox patients = new VBox();
 		Text usersName = new Text(user.getName());
-//		VBox topAreaV = new VBox();
+		BorderPane title = new BorderPane();
+		Text titleTXT = new Text("My Patients");
 		BorderPane nameNbuttons = new BorderPane();
 		BorderPane backBtnContainer = new BorderPane();
 		Button back = new Button();
@@ -61,15 +62,13 @@ public class MyPatients {
 		BorderPane addViewButtons = new BorderPane();
 		Button view = new Button();
 		Button addExist = new Button();
+		title.setCenter(titleTXT);
 		addViewButtons.setLeft(view);
-		addViewButtons.setRight(addExist);
-		// layout consists of a main border pane "content" ON TOP
-		// it has a VBOX inside is an HBOX with name and buttons
-		// then the border pane with back button
+		addViewButtons.setRight(addExist);		
 		nameNbuttons.setLeft(usersName);
 //		topAreaV.getChildren().addAll(nameNbuttons, backBtnContainer);
 		content.setTop(nameNbuttons);
-		patients.getChildren().addAll(backBtnContainer, patientsList, addViewButtons);
+		patients.getChildren().addAll(backBtnContainer, title, patientsList, addViewButtons);
 		content.setCenter(patients);
 
 		// setup buttons
@@ -85,11 +84,12 @@ public class MyPatients {
 		addExist.setText("Add Existing");
 		
 		
-		// centering.setAlignment(Pos.CENTER);
+		//Setup styles
+		title.setStyle("-fx-font-size: 20px; -fx-background-color: rgb(200, 238, 242); -fx-text-align: center;");
 		nameNbuttons.setStyle("-fx-background-color: rgb(250, 250, 250)");
 		patients.setStyle("-fx-background-color: rgb(230, 238, 242)");
 		usersName.setFont(overall);
-		
+		patientsList.setStyle("-fx-font-size: 15px");
 		//Populating and setting display name for ListView of patients
 		patientsList.setCellFactory(new Callback<ListView<Patient>, ListCell<Patient>>() {
 		    @Override
@@ -108,6 +108,7 @@ public class MyPatients {
 		        return cell;
 		    }
 		});
+		
 		for (Patient patient : user.getPatients()) {
 			patientsList.getItems().add(patient);
 
@@ -134,8 +135,8 @@ public class MyPatients {
 		@Override
 		public void handle(ActionEvent e) {
 			try {
-				MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), user);
 				stage.close();
+				MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), user);
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -147,7 +148,7 @@ public class MyPatients {
 		@Override
 		public void handle(ActionEvent e) {
 			try {
-				PatientView mainMenu = new PatientView(sizeX, sizeY, 
+				PatientOptionsMenu mainMenu = new PatientOptionsMenu(sizeX, sizeY, 
 						stage.getX(), stage.getY(), patientsList.getSelectionModel().getSelectedItem(), self);
 				stage.close();
 			} catch (Exception e2) {

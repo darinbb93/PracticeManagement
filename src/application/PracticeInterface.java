@@ -10,16 +10,17 @@ import Data.*;
 public class PracticeInterface extends Application {
 	MainMenu mm;
 	LoginMenu login;
-	
+	public static Database database = new Database();
+
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			database.initialize();
+
 //			login = new LoginMenu(250, 450, 10, 20);
 			//debugging code
-			Database debug = new Database();
-			debug.initialize();
-			Practitioner doctor = (Practitioner)debug.getMembers().get(1);
+			Practitioner doctor = (Practitioner)database.getMembers().get(1);
 //			System.out.print(doctor.getPatients().get(1).getName());
 			mm = new MainMenu(300, 600, 10, 20, doctor);
 		} catch(Exception e) {

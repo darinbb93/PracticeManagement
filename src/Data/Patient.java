@@ -6,11 +6,12 @@ import java.util.Date;
 
 public class Patient extends Member {
 	private String medicare;
+	private ArrayList<Equipment> borrowed = new ArrayList<Equipment>();
 	private ArrayList<Appointment> history = new ArrayList<Appointment>();
 	private ArrayList<Treatment> tPlan = new ArrayList<Treatment>();
 	
 	public Patient(String _username, String _password, String _name, String _address, 
-			String _email, String _phone, Date _dob,String _medicare) {
+			String _email, String _phone, Date _dob, String _medicare) {
 		
 		username = _username;
 		password = _password;
@@ -29,6 +30,10 @@ public class Patient extends Member {
 	public void setMedicare(String medicare) {
 		this.medicare = medicare;
 	}
+	public ArrayList<Equipment> getBorrowed() {
+		return borrowed;
+	}
+
 	public ArrayList<Treatment> gettPlan() {
 		return tPlan;
 	}

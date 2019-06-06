@@ -1,12 +1,16 @@
 package Data;
 
+import java.util.Date;
+
 public class Appointment {
 	private String reason;
 	private String findings;
 	private String procedures;
 	private String outcome;
-		
+	private boolean future;
+	private Date date;
 	
+
 	public Appointment(String reason, String findings, String procedures, String outcome) {		
 		this.reason = reason;
 		this.findings = findings;
@@ -37,5 +41,21 @@ public class Appointment {
 	}
 	public void setOutcome(String outcome) {
 		this.outcome = outcome;
+	}	
+	
+	public boolean isFuture() {
+		return future;
+	}
+
+	public void setFuture(boolean future) {
+		this.future = future;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

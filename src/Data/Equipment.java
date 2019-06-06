@@ -5,7 +5,16 @@ public class Equipment {
 	private String ID;
 	private String brand;
 	private String model;
-
+	
+		
+	public Equipment(String description, String iD, String brand, String model) {
+		super();
+		this.description = description;
+		ID = iD;
+		this.brand = brand;
+		this.model = model;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -30,4 +39,5 @@ public class Equipment {
 	public void setModel(String model) {
 		this.model = model;
 	}
+	
 }
