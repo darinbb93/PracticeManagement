@@ -20,7 +20,7 @@ public class MainMenu {
 	private double sizeX;
 	private double sizeY;
 	private double positionX;
-	private double positionY;	
+	private double positionY;
 	private BorderPane content;
 	private VBox buttonArea;
 	private HBox patientFind;
@@ -31,24 +31,24 @@ public class MainMenu {
 	private Stage stage;
 	private Text usersName;
 	private Scene scene;
-	private Member user;
+	private Practitioner user;
 
-	public MainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Member _user) {
-		
+	public MainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Practitioner _user) {
+
 		sizeX = _sizeX;
 		sizeY = _sizeY;
 		positionX = _positionX;
-		positionY = _positionY;		
+		positionY = _positionY;
 		user = _user;
-		
+
 		buildUpStage();
-		
-		}
-		
-		//creates the scene and all elements, adds to stage and shows it
-		private void buildUpStage() {
-		//Stage setup
-		stage = new Stage();			
+
+	}
+
+	// creates the scene and all elements, adds to stage and shows it
+	private void buildUpStage() {
+		// Stage setup
+		stage = new Stage();
 		stage.setX(positionX);
 		stage.setY(positionY);
 		stage.setTitle("Practice Management - Main Menu");
@@ -58,14 +58,14 @@ public class MainMenu {
 		stage.setWidth(sizeX);
 		stage.setMaxWidth(sizeX);
 		stage.setMinWidth(sizeX);
-		
-		//Assigned font for all texts
+
+		// Assigned font for all texts
 		Font overall = Font.font("Aral", 20);
-		
-		//setup layout having a border pane with top containing
-		//an HBox which displays username, more and help button 
-		//then center Using an HBox to center content horizontally
-		//containing a VBox of all the buttons 
+
+		// setup layout having a border pane with top containing
+		// an HBox which displays username, more and help button
+		// then center Using an HBox to center content horizontally
+		// containing a VBox of all the buttons
 		content = new BorderPane();
 		buttonArea = new VBox();
 		usersName = new Text(user.getName());
@@ -75,19 +75,17 @@ public class MainMenu {
 		content.setTop(topArea);
 		content.setCenter(centering);
 		centering.getChildren().add(buttonArea);
-		
+
 		centering.setAlignment(Pos.CENTER);
 		topArea.setStyle("-fx-background-color: rgb(250, 250, 250)");
 		centering.setStyle("-fx-background-color: rgb(230, 238, 242)");
 		usersName.setFont(overall);
-		
-		
+
 //Buttons setup as HBox with an image component and Text 
-		
+
 		URL imgURL;
-		
-		
-		//My Patient
+
+		// My Patient
 		myPatients = new HBox();
 		imgURL = getClass().getResource("patient50.png");
 		Image myPIMG = new Image(imgURL.toString());
@@ -97,18 +95,17 @@ public class MainMenu {
 		myPatients.getChildren().addAll(myPIMG_VIEW, myPTXT);
 		myPatients.setOnMouseClicked(myPatientsClick);
 
-		//Patient Find
-		patientFind =  new HBox();		
+		// Patient Find
+		patientFind = new HBox();
 		imgURL = getClass().getResource("pFind50.png");
 		Image pFindIMG = new Image(imgURL.toString());
 		ImageView pFindIMG_VIEW = new ImageView(pFindIMG);
 		Text pFindTXT = new Text("Find Patient");
 		pFindTXT.setFont(overall);
 		patientFind.getChildren().addAll(pFindIMG_VIEW, pFindTXT);
-		
 
-		//time Table
-		timetable =  new HBox();		
+		// time Table
+		timetable = new HBox();
 		imgURL = getClass().getResource("tTable50.png");
 		Image tTblIMG = new Image(imgURL.toString());
 		ImageView tTblIMG_VIEW = new ImageView(tTblIMG);
@@ -116,25 +113,24 @@ public class MainMenu {
 		tTblTXT.setFont(overall);
 		timetable.getChildren().addAll(tTblIMG_VIEW, tTblTXT);
 
-		//settings
-		settings =  new HBox();		
+		// settings
+		settings = new HBox();
 		imgURL = getClass().getResource("stngs50.png");
 		Image stngsIMG = new Image(imgURL.toString());
 		ImageView stngsIMG_VIEW = new ImageView(stngsIMG);
 		Text stngsTXT = new Text("Settings");
 		stngsTXT.setFont(overall);
 		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);
-		
-		
-		//New Patient
-		newP =  new HBox();		
+
+		// New Patient
+		newP = new HBox();
 		imgURL = getClass().getResource("new50.png");
 		Image newPIMG = new Image(imgURL.toString());
 		ImageView newPIMG_VIEW = new ImageView(newPIMG);
 		Text newPTXT = new Text("New Patient");
 		newPTXT.setFont(overall);
 		newP.getChildren().addAll(newPIMG_VIEW, newPTXT);
-		
+
 		buttonArea.getChildren().addAll(myPatients, patientFind, timetable, settings, newP);
 
 //		buttonArea.setLeft(patientFind);
@@ -149,8 +145,7 @@ public class MainMenu {
 //		newPostItNote.setOnAction(newButton);
 //		deletePostItNote.setOnAction(closeButton);
 
-
-		//replacing the right click menu with custom
+		// replacing the right click menu with custom
 //		textArea.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 //		textArea.setOnMouseClicked(rightClick);
 //
@@ -172,27 +167,23 @@ public class MainMenu {
 //		cut.setOnAction(cutButton);
 //		about.setOnAction(aboutButton);
 
-		//setup custom resize and move fucntions
-	
+		// setup custom resize and move fucntions
 
 //		buttonArea.setOnMousePressed(clickContent);		 
 //		buttonArea.setOnMouseDragged(dragContent);
 //		buttonArea.setOnMouseReleased(hoverExit);
 
-	
-		//setup and show scene
-		scene = new Scene(content,sizeX,sizeY);
+		// setup and show scene
+		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-		//following code must remain below "stage.show()" in order to properly 
-		//modify background color for the "textArea" casting it to a "Region"	
+		// following code must remain below "stage.show()" in order to properly
+		// modify background color for the "textArea" casting it to a "Region"
 //		Region region = (Region) textArea.lookup(".content");
 //		region.setStyle( "-fx-background-color: rgb(253, 253, 201)" );
 	}
 
-
-	//EVENT HANDLERS
-
+	// EVENT HANDLERS
 
 //	//NEW NOTE BUTTON FUNCTION
 //	EventHandler<ActionEvent> newButton = new EventHandler<ActionEvent>(){
@@ -293,15 +284,15 @@ public class MainMenu {
 //		}
 //	};
 //
-	//My patients setup mouse click
+	// My patients setup mouse click
 	EventHandler<MouseEvent> myPatientsClick = new EventHandler<MouseEvent>() {
-		@Override 
+		@Override
 		public void handle(MouseEvent e) {
-			if(e.getButton() == MouseButton.PRIMARY) {
+			if (e.getButton() == MouseButton.PRIMARY) {
 				try {
 					MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
-							}
-				catch(Exception e2) {
+					stage.close();
+				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 			}

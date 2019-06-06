@@ -1,5 +1,6 @@
 package Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Practitioner extends Member {
@@ -7,7 +8,8 @@ public class Practitioner extends Member {
 	private String education;
 	private String skills;	
 	private String licenseID;
-	public Specs specialise; 
+	private ArrayList<Patient> patients = new ArrayList<Patient>();
+	public Specs specialise; 	
 	public enum Specs {GENERAL, ONCOLOGY, WOMENS_HEALTH, CARDIO, ASSISSTANT}
 	
 
@@ -46,5 +48,8 @@ public class Practitioner extends Member {
 	}
 	public void setLicenseID(String licenseID) {
 		this.licenseID = licenseID;
+	}
+	public ArrayList<Patient> getPatients() {
+		return patients;
 	}
 }

@@ -113,13 +113,18 @@ public class LoginMenu {
 
 			} else {
 				boolean found = false;
-				Member theMember = null;
+				Practitioner theMember = null;
 				for (Member member : localData.getMembers()) {
 					if (username.getText().equals(member.getUsername())) {
 						found = true;
-						theMember = member;
+						try{
+							theMember = (Practitioner)member;
+						}catch(Exception notDoctor) {
+							//Run patient app
+						}
 						break;
 					}
+					
 				}
 				if (!found) {
 					warning.setText("Invalid Username! Try again!");

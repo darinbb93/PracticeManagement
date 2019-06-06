@@ -49,7 +49,7 @@ public class Database {
 		practitioners.add(doc1);
 		members.add(doc1);
 		
-		Practitioner doc2 = new Practitioner("a.potoni", prPass, "Angel Potoni", 
+		Practitioner doc2 = new Practitioner("a.potoni", prPass, "Angela Potoni", 
 				prAddress, prEmail, prPhone, prDate, prEduc, prSkills, prLic);		
 		practitioners.add(doc2);
 		members.add(doc2);
@@ -122,7 +122,40 @@ public class Database {
 		
 		Patient p1 = new Patient("bogdb001", prPass, "Darin Bogdanov", 
 				prAddress, prEmail, prPhone, prDate, "01356781234");
-		members.add(p1);		
+		members.add(p1);
+		patients.add(p1);
+
+		Patient p2 = new Patient("wanjy139", prPass, "Jingqin Wang", 
+				prAddress, prEmail, prPhone, prDate, "01356781234");
+		members.add(p2);
+		patients.add(p2);
+
+		Patient p3 = new Patient("fuyty006", prPass, "Tianyi Fu", 
+				prAddress, prEmail, prPhone, prDate, "01356781234");
+		members.add(p3);
+		patients.add(p3);
+
+		Patient p4 = new Patient("jiajy027", prPass, "Jialin Jia", 
+				prAddress, prEmail, prPhone, prDate, "01356781234");
+		members.add(p4);
+		patients.add(p4);
+
+		Patient p5 = new Patient("mohsy063", prPass, "Sushant Mohite", 
+				prAddress, prEmail, prPhone, prDate, "01356781234");
+		members.add(p5);
+		patients.add(p5);
+
+		Patient p6 = new Patient("zengy004", prPass, "Guandi Zeng", 
+				prAddress, prEmail, prPhone, prDate, "01356781234");
+		members.add(p6);
+		patients.add(p6);
 		
+		
+		for(Practitioner doctor: practitioners) {
+			for(Patient patient : patients) {
+				doctor.getPatients().add(patient);
+
+			}
+		}
 	}
 }
