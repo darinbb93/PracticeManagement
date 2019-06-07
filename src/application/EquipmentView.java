@@ -3,6 +3,8 @@ package application;
 import Data.*;
 import javafx.stage.*;
 import javafx.util.Callback;
+
+
 import java.net.URL;
 import javafx.event.*;
 import javafx.scene.Scene;
@@ -108,6 +110,10 @@ public class EquipmentView {
 		search.setPromptText("Search");
 		toReturn.setMaxHeight(50);
 
+		//ANIMATING LIST VIEW
+//		eqList.setCellFactory(AnimatedListCell.forListView(AnimationType.ROTATE_RIGHT, AnimationType.FADE_OUT))
+		
+		
 		// check if any items are borrowed create returns list
 		if (user.getBorrowed().size() > 0) {
 			// Populating and setting display name for ListView of patients borrowed equipment
