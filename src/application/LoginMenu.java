@@ -35,7 +35,6 @@ public class LoginMenu {
 	private Stage stage;
 	private Scene scene;
 
-	
 	public LoginMenu(double _sizeX, double _sizeY, double _positionX, double _positionY) {
 
 		sizeX = _sizeX;
@@ -64,8 +63,8 @@ public class LoginMenu {
 		password = new TextField();
 		password.setPromptText("Password");
 		password.setMaxWidth(150);
-		
-		//Button setup
+
+		// Button setup
 		HBox buttonArea = new HBox();
 		login = new Button("Login");
 		login.setOnAction(loginAction);
@@ -95,7 +94,7 @@ public class LoginMenu {
 		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-		
+
 	}
 
 	// Login button action
@@ -112,18 +111,23 @@ public class LoginMenu {
 
 			} else {
 				boolean found = false;
-				Practitioner theMember = null;
+				Member theMember = null;
+				Practitioner aDoctor = null;
+				Patient aPatient = null;
+				boolean isDoctor = true;
 				for (Member member : PracticeInterface.database.getMembers()) {
 					if (username.getText().equals(member.getUsername())) {
 						found = true;
-						try{
-							theMember = (Practitioner)member;
-						}catch(Exception notDoctor) {
-							//Run patient app
+						theMember = member;
+						try {
+							aDoctor = (Practitioner)member;
+						} catch (Exception notDoctor) {
+							aPatient = (Patient)member;
+							isDoctor = false;
 						}
 						break;
 					}
-					
+
 				}
 				if (!found) {
 					warning.setText("Invalid Username! Try again!");
@@ -131,19 +135,31 @@ public class LoginMenu {
 				} else if (!theMember.getPassword().equals(password.getText())) {
 					warning.setText("Invalid Password! Try again!");
 				} else {
-					try {
-						stage.close();
-						MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), 
-								stage.getY(), theMember);
-					} catch (Exception e1) {
-						e1.printStackTrace();
+					if (isDoctor) {
+						// DOCTOR LOGIN
+						try {
+							stage.close();
+							MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), aDoctor);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
-					
+					// PATIENT LOGIN
+					else {
+						try {
+							stage.close();
+							PatientMainMenu pMainMenu = new PatientMainMenu(sizeX, sizeY, stage.getX(), stage.getY(),
+									aPatient);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+
 				}
 			}
 		}
 	};
-	
+
 	EventHandler<ActionEvent> signUpAction = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {
@@ -151,5 +167,5 @@ public class LoginMenu {
 			PatientSignUp signUp = new PatientSignUp(sizeX, sizeY, stage.getX(), stage.getY());
 		}
 	};
-		
+
 }
