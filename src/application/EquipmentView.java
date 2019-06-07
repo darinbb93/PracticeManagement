@@ -3,8 +3,6 @@ package application;
 import Data.*;
 import javafx.stage.*;
 import javafx.util.Callback;
-
-
 import java.net.URL;
 import javafx.event.*;
 import javafx.scene.Scene;
