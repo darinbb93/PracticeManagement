@@ -77,7 +77,7 @@ public class PatientSignUp {
 		stage = new Stage();
 		stage.setX(positionX);
 		stage.setY(positionY);
-		stage.setTitle("Practice Management - Main Menu");
+		stage.setTitle("Patient Sign Up");
 		stage.setHeight(sizeY);
 		stage.setMinHeight(sizeY);
 		stage.setMaxHeight(sizeY);
@@ -207,19 +207,18 @@ public class PatientSignUp {
 				
 				//IF A DOCTOR IS ADDING NEW PATIENT IT WILL ATTACH TO THE DOCTORS ACCOUNT AND WILL RETURN TO 
 				//DOCTORS MAIN MENU
-				try {
+				if(user != null) {
 					user.getPatients().add(newP);
 					stage.close();
 					MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), user);	
+				}else {
 					
-				}
-				catch(Exception notDoctor) {
-					
-				}
-				//OTHERWISE WILL JUST OPEN PATIENT MAIN MENU PASSING THE NEW PATIENT TO IT
-				stage.close();
-				PatientMainMenu mainMenu = new PatientMainMenu(sizeX, sizeY, stage.getX(), stage.getY(), newP);	
+					//OTHERWISE WILL JUST OPEN PATIENT MAIN MENU PASSING THE NEW PATIENT TO IT
+					stage.close();
+					PatientMainMenu mainMenu = new PatientMainMenu(sizeX, sizeY, stage.getX(), stage.getY(), newP);	
 
+				}
+			
 			}
 		}
 	};

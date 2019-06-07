@@ -17,12 +17,12 @@ public class PracticeInterface extends Application {
 		try {
 			database.initialize();
 			
-//			login = new LoginMenu(250, 450, 10, 20);
+			login = new LoginMenu(250, 450, 10, 20);
 			//debugging code
 			
-			Practitioner doctor = (Practitioner)database.getMembers().get(1);
+//			Practitioner doctor = (Practitioner)database.getMembers().get(1);
 //			System.out.print(doctor.getPatients().get(1).getName());
-			MainMenu mm = new MainMenu(300, 600, 10, 20, doctor);
+//			MainMenu mm = new MainMenu(300, 600, 10, 20, doctor);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

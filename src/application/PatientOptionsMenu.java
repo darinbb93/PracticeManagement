@@ -30,19 +30,19 @@ public class PatientOptionsMenu {
 	private double positionY;
 	private Stage stage;
 	private Scene scene;
-	private Patient user;
+	private Patient thePatient;
 	private MyPatients prevMenu;
 	URL imgURL;
 	PatientOptionsMenu self = this;
 
-	public PatientOptionsMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Patient _user,
+	public PatientOptionsMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Patient _thePatient,
 			MyPatients _prevMenu) {
 
 		sizeX = _sizeX;
 		sizeY = _sizeY;
 		positionX = _positionX;
 		positionY = _positionY;
-		user = _user;
+		thePatient = _thePatient;
 		prevMenu = _prevMenu;
 
 		buildUpStage();
@@ -55,7 +55,7 @@ public class PatientOptionsMenu {
 		stage = new Stage();
 		stage.setX(positionX);
 		stage.setY(positionY);
-		stage.setTitle("Practice Management - Main Menu");
+		stage.setTitle("Patient Options for Doctors");
 		stage.setHeight(sizeY);
 		stage.setMinHeight(sizeY);
 		stage.setMaxHeight(sizeY);
@@ -69,7 +69,7 @@ public class PatientOptionsMenu {
 		BorderPane content = new BorderPane();
 		BorderPane subContent = new BorderPane();
 		VBox patientOptions = new VBox();
-		Text usersName = new Text(user.getName());
+		Text usersName = new Text(thePatient.getName());
 		HBox centering = new HBox();
 		BorderPane nameNbuttons = new BorderPane();
 		BorderPane backBtnContainer = new BorderPane();
@@ -205,21 +205,7 @@ public class PatientOptionsMenu {
 
 	};
 
-	// Treatment plan setup mouse click
-	EventHandler<MouseEvent> tPlanClick = new EventHandler<MouseEvent>() {
-		@Override
-		public void handle(MouseEvent e) {
-			if (e.getButton() == MouseButton.PRIMARY) {
-				try {
-//					MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
-					stage.close();
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
 
-		}
-	};
 
 	// Equipment setup mouse click
 	EventHandler<MouseEvent> equipmentClick = new EventHandler<MouseEvent>() {
@@ -228,7 +214,7 @@ public class PatientOptionsMenu {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				try {
 					stage.close();
-					EquipmentView equipmentMenu = new EquipmentView(sizeX, sizeY, stage.getX(), stage.getY(), user,
+					EquipmentView equipmentMenu = new EquipmentView(sizeX, sizeY, stage.getX(), stage.getY(), thePatient,
 							self);
 				} catch (Exception e2) {
 					e2.printStackTrace();
@@ -253,4 +239,19 @@ public class PatientOptionsMenu {
 
 		}
 	};
+	//Mouse click setup for tPlan
+		EventHandler<MouseEvent> tPlanClick = new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				if (e.getButton() == MouseButton.PRIMARY) {
+					try {
+						stage.close();
+						TPlanView tPlanMenu = new TPlanView(sizeX, sizeY, stage.getX(), stage.getY(), thePatient, self, true);
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+
+			}
+		};
 }

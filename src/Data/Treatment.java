@@ -35,4 +35,25 @@ public class Treatment {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	//overriding to string to display in listview
+	@Override
+	public String toString() {
+		String theString = "";
+		switch (type) {
+		case APPOINTMENT:
+			theString = "Appointment with: " + doctor.getName();
+			break;
+		case EXCERCISE:
+			theString = "Excercise: " + instructions.substring(0, 10);
+			break;
+		case ACTIVITY:
+			theString = "Activity: " + instructions.substring(0, 10);
+			break;
+
+		default:
+			break;
+		} 
+		return theString;
+	}
 }

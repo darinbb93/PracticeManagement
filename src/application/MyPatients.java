@@ -25,7 +25,7 @@ public class MyPatients {
 	private double positionY;	
 	private Scene scene;
 	private Stage stage;
-	private Practitioner user;
+	public Practitioner user;
 	private ListView<Patient> patientsList;
 	private MyPatients self = this;
 	

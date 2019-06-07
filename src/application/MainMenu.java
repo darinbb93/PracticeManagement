@@ -134,6 +134,7 @@ public class MainMenu {
 		Text newPTXT = new Text("New Patient");
 		newPTXT.setFont(overall);
 		newP.getChildren().addAll(newPIMG_VIEW, newPTXT);
+		newP.setOnMouseClicked(newPClicked);
 
 		buttonArea.getChildren().addAll(myPatients, patientFind, timetable, settings, newP);
 
@@ -186,7 +187,7 @@ public class MainMenu {
 
 	// EVENT HANDLERS
 
-	// My patients setup mouse click
+	//Mouse click setup for My patients  
 	EventHandler<MouseEvent> myPatientsClick = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent e) {
@@ -201,5 +202,22 @@ public class MainMenu {
 
 		}
 	};
+	
+	//Mouse click setup for New patient
+	EventHandler<MouseEvent> newPClicked = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.close();
+					PatientSignUp signUpMenu = new PatientSignUp(sizeX, sizeY, stage.getX(), stage.getY(), user);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
+	
 	
 }

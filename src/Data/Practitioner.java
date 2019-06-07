@@ -2,7 +2,16 @@ package Data;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+/**	
+ * This is the Practitioner/doctor Data class derived from Abstract Member
+ * this class defines Doctors recorded in the system. Each doctor has addition 
+ * education, skills, licenseID and specialisation data along with a List of
+ * Patients acting as a form of favourites or current patients.
+ * 
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class Practitioner extends Member {
 	
 	private String education;

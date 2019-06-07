@@ -60,7 +60,7 @@ public class EquipmentView {
 		stage.setWidth(sizeX);
 		stage.setMaxWidth(sizeX);
 		stage.setMinWidth(sizeX);
-		stage.setTitle("Practice Management - My patients");
+		stage.setTitle("Equipment Management");
 
 		// setup fonts for text
 		Font overall = Font.font("Aral", 20);

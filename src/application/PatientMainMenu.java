@@ -57,7 +57,7 @@ public class PatientMainMenu {
 		stage = new Stage();
 		stage.setX(positionX);
 		stage.setY(positionY);
-		stage.setTitle("Practice Management - Main Menu");
+		stage.setTitle("Patients Main Menu");
 		stage.setHeight(sizeY);
 		stage.setMinHeight(sizeY);
 		stage.setMaxHeight(sizeY);
@@ -184,8 +184,9 @@ public class PatientMainMenu {
 		public void handle(MouseEvent e) {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				try {
-//					MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
 					stage.close();
+					TPlanView tPlanMenu = new TPlanView(sizeX, sizeY, stage.getX(), stage.getY(), user, null, false);
+
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
