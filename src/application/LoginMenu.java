@@ -16,7 +16,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
 import Data.*;
-
+/**	
+ * This class represents and builds the login menu and determines whether a doctor 
+ * or patient is trying to login and leads to the appropriate menu. 
+ * It also has a SignUp option which takes the user to a signup (as a Patient) page
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class LoginMenu {
 
 	private double sizeX;

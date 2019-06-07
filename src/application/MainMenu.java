@@ -15,7 +15,15 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
-
+/**	
+ * This class represents and builds the Main Menu that doctors would see when
+ * they login and where they can navigate to see their pateints,see all
+ * patients signed up to the hospital, see their timetable, change some setting 
+ * and change some settings
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class MainMenu {
 	private double sizeX;
 	private double sizeY;

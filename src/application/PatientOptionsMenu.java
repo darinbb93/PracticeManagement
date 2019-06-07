@@ -15,7 +15,14 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
-
+/**	
+ * This class represents and builds the Menu giving the doctor
+ * options to either give the patient equipment,
+ * view/change their treatment plan or just view their details.
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class PatientOptionsMenu {
 	private double sizeX;
 	private double sizeY;

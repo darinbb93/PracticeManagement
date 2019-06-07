@@ -1,7 +1,13 @@
 package Data;
 
 import java.util.Date;
-
+/**	
+ * This is the Appointment Data class representing and holding 
+ * data for each appointment made
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class Appointment {
 	private String reason;
 	private String findings;

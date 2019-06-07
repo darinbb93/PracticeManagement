@@ -8,7 +8,6 @@ import Data.*;
 
 
 public class PracticeInterface extends Application {
-	MainMenu mm;
 	LoginMenu login;
 	public static Database database = new Database();
 
@@ -20,9 +19,10 @@ public class PracticeInterface extends Application {
 			
 			login = new LoginMenu(250, 450, 10, 20);
 			//debugging code
+			
 //			Practitioner doctor = (Practitioner)database.getMembers().get(1);
 //			System.out.print(doctor.getPatients().get(1).getName());
-//			mm = new MainMenu(300, 600, 10, 20, doctor);
+//			MainMenu mm = new MainMenu(300, 600, 10, 20, doctor);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

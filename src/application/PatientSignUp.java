@@ -19,7 +19,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**	
+ * This class represents and builds the Menu where patients will be added 
+ * to the system and takes all their personal details.
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class PatientSignUp {
 	private double sizeX;
 	private double sizeY;

@@ -10,7 +10,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
-
+/**	
+ * This class represents and builds equipment management screen. 
+ * It uses listview to show all items available at the practice, a Textfield
+ * acting as a searchbar to search available equipment and generates another listview 
+ * based on items currently borrowed by the patient passed in.
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class EquipmentView {
 	private double sizeX;
 	private double sizeY;

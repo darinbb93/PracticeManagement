@@ -9,7 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
-
+/**	
+ * This class represents and builds the My patients view which shows the doctor all 
+ * patients currently tied to their account/schedule. They can select and vie patients details.
+ * Alternatively they can add a patient that is on record to their list, and can also remove patients.
+ * (basically a favourites/bookmarks list for quick access)
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class MyPatients {
 	private double sizeX;
 	private double sizeY;

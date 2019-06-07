@@ -15,7 +15,13 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
-
+/**	
+ * This class represents and builds the Main Menu for patients.
+ * It presents them with options to go to setting, view their 
+ * appointments time table view their treatment plan and book emergency appointment.
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class PatientMainMenu {
 	private double sizeX;
 	private double sizeY;
