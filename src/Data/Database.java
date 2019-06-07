@@ -2,7 +2,13 @@ package Data;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+/**	
+ * This is the Database Date class acting as a local storage for all data
+ * the practice needs stored and accessed
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class Database {
 	private ArrayList<Member> members = new ArrayList<Member>();
 	private ArrayList<Equipment> equipmentOwned = new ArrayList<Equipment>();

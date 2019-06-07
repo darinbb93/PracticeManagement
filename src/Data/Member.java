@@ -1,7 +1,13 @@
 package Data;
 
 import java.util.Date;
-
+/**	
+ * This is the Abstract Member class from which each 
+ * type of member of the practice is derived from
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public abstract class Member {
 	protected String username;
 	protected String password;

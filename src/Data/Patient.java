@@ -3,7 +3,15 @@ package Data;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+/**	
+ * This is the Patient Data class derived from Abstract Member
+ * this class defines Patients recorded in the system and stores 
+ * their appointments history, equipment borrowed by them and
+ * their treatment plan. 
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class Patient extends Member {
 	private String medicare;
 	private ArrayList<Equipment> borrowed = new ArrayList<Equipment>();

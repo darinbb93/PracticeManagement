@@ -1,8 +1,11 @@
 package application;
 
 import Data.*;
+import javafx.animation.*;
 import javafx.stage.*;
 import javafx.util.Callback;
+import javafx.util.Duration;
+
 import java.net.URL;
 import javafx.event.*;
 import javafx.scene.Scene;
@@ -151,6 +154,28 @@ public class EquipmentView {
 						super.updateItem(item, empty);
 						if (item != null) {
 							setText(item.getDescription());
+		//ANIMATION USING JAVAFX.ANIMATION CLASS AS PER REQUESTED
+							
+							TranslateTransition tr = new TranslateTransition(Duration.millis(1));
+							tr.setToX(-100);
+						
+							TranslateTransition tr2 = new TranslateTransition(Duration.millis(200));
+							
+							tr2.setToX(30);
+							
+							TranslateTransition tr3 = new TranslateTransition(Duration.millis(250));
+							tr3.setToX(0);
+							
+							ScaleTransition sc = new ScaleTransition(Duration.millis(550));
+							sc.setFromY(0.01);
+							sc.setToY(1);
+							
+							
+							SequentialTransition sq = new SequentialTransition(this, tr, tr2, tr3);
+							
+							ParallelTransition pr = new ParallelTransition(this, sc, sq);
+							pr.play();
+						
 						} else {
 							setText(null);
 						}

@@ -3,7 +3,8 @@ package Data;
 import java.util.Date;
 /**	
  * This is the Appointment Data class representing and holding 
- * data for each appointment made
+ * data for each appointment made containing the invovled patient 
+ * and doctor  as well as the date and various information about the appointment 
  * 
  * @author Darin Bogdanov  - bogdb001
  *	

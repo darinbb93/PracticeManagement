@@ -1,5 +1,11 @@
 package Data;
-
+/**	
+ * This is the Equipment Data class storing details about each piece of equipment 
+ * the practice owns and wants to manage it using the system for lending to patients
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class Equipment {
 	private String description;	
 	private String ID;

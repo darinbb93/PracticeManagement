@@ -1,7 +1,15 @@
 package Data;
 
 import java.util.Date;
-
+/**	
+ * This is the Treatment Class representing what data is contained 
+ * by each Treatment block a treatment plan is simply a series of
+ * treatment blocks
+ * 
+ * 
+ * @author Darin Bogdanov  - bogdb001
+ *	
+ */
 public class Treatment {
 	private Practitioner doctor;
 	private String instructions;
