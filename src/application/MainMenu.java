@@ -81,7 +81,7 @@ public class MainMenu {
 
 //Buttons setup as HBox with an image component and Text 
 
-		// My Patient
+		// My Patient menu link
 		myPatients = new HBox();
 		imgURL = getClass().getResource("patient50.png");
 		Image myPIMG = new Image(imgURL.toString());
@@ -91,7 +91,7 @@ public class MainMenu {
 		myPatients.getChildren().addAll(myPIMG_VIEW, myPTXT);
 		myPatients.setOnMouseClicked(myPatientsClick);
 
-		// Patient Find
+		// Patient Find menu link
 		patientFind = new HBox();
 		imgURL = getClass().getResource("pFind50.png");
 		Image pFindIMG = new Image(imgURL.toString());
@@ -100,7 +100,7 @@ public class MainMenu {
 		pFindTXT.setFont(overall);
 		patientFind.getChildren().addAll(pFindIMG_VIEW, pFindTXT);
 
-		// time Table
+		// time Table view link
 		timetable = new HBox();
 		imgURL = getClass().getResource("tTable50.png");
 		Image tTblIMG = new Image(imgURL.toString());
@@ -109,7 +109,7 @@ public class MainMenu {
 		tTblTXT.setFont(overall);
 		timetable.getChildren().addAll(tTblIMG_VIEW, tTblTXT);
 
-		// settings
+		// settings menu link
 		settings = new HBox();
 		imgURL = getClass().getResource("stngs50.png");
 		Image stngsIMG = new Image(imgURL.toString());
@@ -118,7 +118,7 @@ public class MainMenu {
 		stngsTXT.setFont(overall);
 		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);
 
-		// New Patient
+		// New Patient sign up menu link
 		newP = new HBox();
 		imgURL = getClass().getResource("new50.png");
 		Image newPIMG = new Image(imgURL.toString());

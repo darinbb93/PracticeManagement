@@ -66,7 +66,6 @@ public class MyPatients {
 		addViewButtons.setLeft(view);
 		addViewButtons.setRight(addExist);		
 		nameNbuttons.setLeft(usersName);
-//		topAreaV.getChildren().addAll(nameNbuttons, backBtnContainer);
 		content.setTop(nameNbuttons);
 		patients.getChildren().addAll(backBtnContainer, title, patientsList, addViewButtons);
 		content.setCenter(patients);

@@ -54,7 +54,7 @@ public class LoginMenu {
 		stage.setY(positionY);
 		stage.setTitle("Practice Management - Login Screen");
 
-		// Hbox login details setup
+		// VBOX login prompt setup
 		loginDetails = new VBox();
 		Text loginPrompt = new Text("Please enter you login details or\nsign up now so you can use the app.");
 		username = new TextField();
@@ -64,10 +64,13 @@ public class LoginMenu {
 		password = new TextField();
 		password.setPromptText("Password");
 		password.setMaxWidth(150);
+		
+		//Button setup
 		HBox buttonArea = new HBox();
 		login = new Button("Login");
 		login.setOnAction(loginAction);
 		signup = new Button("Signup");
+		signup.setOnAction(signUpAction);
 		buttonArea.setAlignment(Pos.CENTER);
 		buttonArea.setSpacing(20);
 		buttonArea.getChildren().addAll(login, signup);
@@ -140,4 +143,13 @@ public class LoginMenu {
 			}
 		}
 	};
+	
+	EventHandler<ActionEvent> signUpAction = new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+			stage.close();
+			PatientSignUp signUp = new PatientSignUp(sizeX, sizeY, stage.getX(), stage.getY());
+		}
+	};
+		
 }

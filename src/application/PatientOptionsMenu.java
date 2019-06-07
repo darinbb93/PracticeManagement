@@ -94,7 +94,7 @@ public class PatientOptionsMenu {
 
 //Buttons setup as HBox with an image component and Text 
 
-		// equipment
+		// equipment view link
 		HBox equipment = new HBox();
 		imgURL = getClass().getResource("eq50.png");
 		Image eqIMG = new Image(imgURL.toString());
@@ -104,7 +104,7 @@ public class PatientOptionsMenu {
 		equipment.getChildren().addAll(eqIMG_VIEW, eqTXT);
 		equipment.setOnMouseClicked(equipmentClick);
 
-		// Patient Find
+		// Treatment plan view link
 		HBox tPlan = new HBox();
 		imgURL = getClass().getResource("tPlan50.png");
 		Image tPlanIMG = new Image(imgURL.toString());
@@ -114,7 +114,7 @@ public class PatientOptionsMenu {
 		tPlan.getChildren().addAll(tPlanIMG_VIEW, tPlanTXT);
 		tPlan.setOnMouseClicked(tPlanClick);
 
-		// time Table
+		// Patients details view link
 		HBox info = new HBox();
 		imgURL = getClass().getResource("info50.png");
 		Image infoIMG = new Image(imgURL.toString());
