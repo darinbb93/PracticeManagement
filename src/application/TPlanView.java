@@ -66,7 +66,7 @@ public class TPlanView {
 		VBox patients = new VBox();
 		Text usersName = new Text(thePatient.getName());	
 		BorderPane title = new BorderPane();
-		Text titleTXT = new Text("My Patients");
+		Text titleTXT = new Text("Treatment Plan");
 		BorderPane nameNbuttons = new BorderPane();
 		BorderPane backBtnContainer = new BorderPane();
 		Button back = new Button();
@@ -81,7 +81,6 @@ public class TPlanView {
 		content.setTop(nameNbuttons);
 		content.setCenter(patients);
 
-		//setup username display and add button based on what is the user of the page 
 	
 		// setup buttons
 		URL imgURL = getClass().getResource("back.png");
@@ -102,25 +101,9 @@ public class TPlanView {
 		patients.setStyle("-fx-background-color: rgb(230, 238, 242)");
 		usersName.setFont(overall);
 		tPLan.setStyle("-fx-font-size: 15px");
-		//Populating and setting display name for ListView of patients
-//		tPLan.setCellFactory(new Callback<ListView<Treatment>, ListCell<Treatment>>() {
-//		    @Override
-//		    public ListCell<Treatment> call(ListView<Treatment> param) {
-//		         ListCell<Treatment> cell = new ListCell<Treatment>() {
-//		             @Override
-//		            protected void updateItem(Treatment item, boolean empty) {
-//		                super.updateItem(item, empty);
-//		                if(item != null) {
-//		                    setText(item.);
-//		                } else {
-//		                    setText(null);
-//		                }
-//		            }
-//		         };
-//		        return cell;
-//		    }
-//		});
-		
+
+		//setup username display and add button based on what is the user of the page 
+
 		for (Treatment treatment : thePatient.gettPlan()) {
 			tPLan.getItems().add(treatment);
 
