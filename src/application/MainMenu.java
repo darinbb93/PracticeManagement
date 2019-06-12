@@ -116,6 +116,7 @@ public class MainMenu {
 		Text tTblTXT = new Text("Timetable");
 		tTblTXT.setFont(overall);
 		timetable.getChildren().addAll(tTblIMG_VIEW, tTblTXT);
+		timetable.setOnMouseClicked(myTimeTableClick);
 
 		// settings menu link
 		settings = new HBox();
@@ -219,5 +220,20 @@ public class MainMenu {
 		}
 	};
 	
+	//Mouse click setup for time table
+		EventHandler<MouseEvent> myTimeTableClick = new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				if (e.getButton() == MouseButton.PRIMARY) {
+					try {
+						stage.close();
+						TimetableView timetableMenu = new TimetableView(sizeX, sizeY, stage.getX(), stage.getY(), user);
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+
+			}
+		};
 	
 }
