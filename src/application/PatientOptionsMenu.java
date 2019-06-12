@@ -89,9 +89,9 @@ public class PatientOptionsMenu {
 		// setup buttons
 		imgURL = getClass().getResource("back.png");
 		backBtnContainer.setLeft(back);
-		back.setMinSize(70, 30);
+		back.setMinSize(50, 15);
 		back.setStyle("-fx-background-image: url('" + imgURL.toString() + "'); -fx-background-repeat: no-repeat;"
-				+ "  -fx-background-position: center; -fx-background-size: 68px 24px; ");
+				+ "  -fx-background-position: center; -fx-background-size: 48px 18px; ");
 		back.setOnAction(backClick);
 
 		centering.setAlignment(Pos.CENTER);
@@ -190,6 +190,12 @@ public class PatientOptionsMenu {
 		positionY = _positionY;
 		buildUpStage();
 	}
+
+	//Getter for previous menu
+	public MyPatients getPrevMenu() {
+		return prevMenu;
+	}
+
 
 	// Back button click setup
 	EventHandler<ActionEvent> backClick = new EventHandler<ActionEvent>() {

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import Data.Database;
 import Data.Member;
 import Data.Patient;
 import Data.Practitioner;
@@ -12,19 +13,23 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-/**	
- * This class represents and builds the Menu where patients will be added 
- * to the system and takes all their personal details.
+
+/**
+ * This class represents and builds the Menu where patients will be added to the
+ * system and takes all their personal details.
  * 
- * @author Darin Bogdanov  - bogdb001
- *	
+ * @author Darin Bogdanov - bogdb001
+ * 
  */
 public class PatientSignUp {
 	private double sizeX;
@@ -41,20 +46,24 @@ public class PatientSignUp {
 	private TextField medicare;
 	private Date dob;
 	private TextField dobTXT;
+	private ChoiceBox<String> gender;
 	private Button signUp;
 	private Stage stage;
 	private Scene scene;
 	private Practitioner user;
+	private MainMenu prevMenu;
 	URL imgURL;
 	private Text warning = new Text("");
 
-	public PatientSignUp(double _sizeX, double _sizeY, double _positionX, double _positionY, Practitioner _user) {
+	public PatientSignUp(double _sizeX, double _sizeY, double _positionX, double _positionY, Practitioner _user,
+			MainMenu _prevMenu) {
 
 		sizeX = _sizeX;
 		sizeY = _sizeY;
 		positionX = _positionX;
 		positionY = _positionY;
 		user = _user;
+		prevMenu = _prevMenu;
 
 		buildUpStage();
 
@@ -85,9 +94,6 @@ public class PatientSignUp {
 		stage.setMaxWidth(sizeX);
 		stage.setMinWidth(sizeX);
 
-		// Assigned font for all texts
-		Font overall = Font.font("Aral", 20);
-
 		content = new VBox();
 		username = new TextField();
 		password = new TextField();
@@ -98,6 +104,9 @@ public class PatientSignUp {
 		medicare = new TextField();
 		dobTXT = new TextField();
 		signUp = new Button("Create Account");
+		gender = new ChoiceBox<String>();
+		BorderPane backBtnContainer = new BorderPane();
+		Button back = new Button();
 		signUp.setOnAction(signUpAction);
 		content.setPadding(new Insets(10, 10, 10, 10));
 		content.setSpacing(10);
@@ -108,8 +117,18 @@ public class PatientSignUp {
 		email.setPromptText("enter your EMAIL here.");
 		phone.setPromptText("enter tour PHONE NUMBER here.");
 		medicare.setPromptText("enter your MEDICARE NUMBER here.");
-		dobTXT.setPromptText("enter your DATE OF BIRTH here. (e.g. 16/01/1998)");
-		content.getChildren().addAll(username, password, name, address, dobTXT, email, phone, medicare, signUp);
+		dobTXT.setPromptText("'16/01/1998' DATE OF BIRTH here.");
+		gender.getItems().addAll("Male", "Female");
+		backBtnContainer.setLeft(back);
+		URL imgURL = getClass().getResource("back.png");
+		backBtnContainer.setLeft(back);
+		back.setMinSize(50, 15);
+		back.setStyle("-fx-background-image: url('" + imgURL.toString() + "'); -fx-background-repeat: no-repeat;"
+				+ "  -fx-background-position: center; -fx-background-size: 48px 18px; ");
+		back.setOnAction(backClick);
+
+		content.getChildren().addAll(backBtnContainer, username, password, name, gender, address, dobTXT, email, phone,
+				medicare, signUp);
 
 		// setup and show scene
 		scene = new Scene(content, sizeX, sizeY);
@@ -117,7 +136,32 @@ public class PatientSignUp {
 		stage.show();
 	}
 
-	// Login button action
+	// back button action handler
+	EventHandler<ActionEvent> backClick = new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+			if (user == null) {
+				try {
+					stage.close();
+					LoginMenu prev = new LoginMenu(sizeX, sizeY, stage.getX(), stage.getY());
+				} catch (Exception e2) {
+					e2.printStackTrace();
+
+				}
+			} else {
+				try {
+					stage.close();
+					prevMenu.showStage(stage.getX(), stage.getY());
+				} catch (Exception e2) {
+					e2.printStackTrace();
+
+				}
+			}
+		}
+
+	};
+
+	// Signup button action
 	EventHandler<ActionEvent> signUpAction = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {
@@ -173,14 +217,17 @@ public class PatientSignUp {
 			}
 			// VERIFYING PHONE
 			for (int i = -1; i < phone.getText().length(); i++) {
-				if(i == -1) i++;
-				if (phone.getText().length() != 10 || (phone.getText().charAt(i) < '0' && phone.getText().charAt(i) > '9')) {
+				if (i == -1)
+					i++;
+				if (phone.getText().length() != 10
+						|| (phone.getText().charAt(i) < '0' && phone.getText().charAt(i) > '9')) {
 					phone.setStyle("-fx-text-box-border: red;-fx-focus-color: red ;");
 					phone.setText("");
 					phone.setPromptText("enter PHONE correctly 10 digits");
 					OK = false;
 				}
 			}
+			
 			// verifying medicare
 			if (medicare.getText().length() != 11) {
 				medicare.setStyle("-fx-text-box-border: red;-fx-focus-color: red ;");
@@ -188,6 +235,7 @@ public class PatientSignUp {
 				medicare.setPromptText("enter MEDICARE NUMBER correctly 11 chars");
 				OK = false;
 			}
+			
 			// VERIFYING DATE
 			try {
 				dob = new SimpleDateFormat("dd/MM/yyyy").parse(dobTXT.getText());
@@ -201,24 +249,26 @@ public class PatientSignUp {
 			}
 
 			if (OK) {
-				
-				Patient newP = new Patient(username.getText(), password.getText(), name.getText(), address.getText(), email.getText(), phone.getText(), dob, medicare.getText());
+
+				Patient newP = new Patient(username.getText(), password.getText(), name.getText(), address.getText(),
+						email.getText(), phone.getText(), dob, medicare.getText(),
+						gender.getSelectionModel().getSelectedItem());
 				PracticeInterface.database.getMembers().add(newP);
-				
-				//IF A DOCTOR IS ADDING NEW PATIENT IT WILL ATTACH TO THE DOCTORS ACCOUNT AND WILL RETURN TO 
-				//DOCTORS MAIN MENU
-				if(user != null) {
+
+				// IF A DOCTOR IS ADDING NEW PATIENT IT WILL ATTACH TO THE DOCTORS PATIENT LIST AND
+				// WILL RETURN TO DOCTORS MAIN MENU
+				if (user != null) {
 					user.getPatients().add(newP);
 					stage.close();
-					MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), user);	
-				}else {
-					
-					//OTHERWISE WILL JUST OPEN PATIENT MAIN MENU PASSING THE NEW PATIENT TO IT
+					MainMenu mainMenu = new MainMenu(sizeX, sizeY, stage.getX(), stage.getY(), user);
+				} else {
+
+					// OTHERWISE WILL JUST OPEN PATIENT MAIN MENU PASSING THE NEW PATIENT TO IT
 					stage.close();
-					PatientMainMenu mainMenu = new PatientMainMenu(sizeX, sizeY, stage.getX(), stage.getY(), newP);	
+					PatientMainMenu mainMenu = new PatientMainMenu(sizeX, sizeY, stage.getX(), stage.getY(), newP);
 
 				}
-			
+
 			}
 		}
 	};

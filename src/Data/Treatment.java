@@ -14,9 +14,20 @@ public class Treatment {
 	private Practitioner doctor;
 	private String instructions;
 	private Date date;
-	public Types type;
+	private Types type;
 	public enum Types { APPOINTMENT, EXCERCISE, ACTIVITY}
+	
+	
+	
+	public Treatment(Practitioner doctor, String instructions, Date date, Types type) {
+		super();
+		this.doctor = doctor;
+		this.instructions = instructions;
+		this.date = date;
+		this.type = type;
+	}
 
+	
 	public Practitioner getDoctor() {
 		return doctor;
 	}
@@ -34,6 +45,13 @@ public class Treatment {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public Types getType() {
+		return type;
+	}
+	public void setType(Types type) {
+		this.type = type;
 	}
 	
 	//overriding to string to display in listview

@@ -25,7 +25,8 @@ public class MyPatients {
 	private double positionY;	
 	private Scene scene;
 	private Stage stage;
-	public Practitioner user;
+	private Practitioner user;
+	private VBox patients;
 	private ListView<Patient> patientsList;
 	private MyPatients self = this;
 	
@@ -59,7 +60,7 @@ public class MyPatients {
 
 		// initialising components
 		BorderPane content = new BorderPane();
-		VBox patients = new VBox();
+		patients = new VBox();
 		Text usersName = new Text(user.getName());
 		BorderPane title = new BorderPane();
 		Text titleTXT = new Text("My Patients");
@@ -69,9 +70,11 @@ public class MyPatients {
 		patientsList = new ListView<Patient>();
 		BorderPane addViewButtons = new BorderPane();
 		Button view = new Button();
-		Button addExist = new Button();
+		Button remove = new Button("Remove");
+		Button addExist = new Button("Add Patient");
 		title.setCenter(titleTXT);
 		addViewButtons.setLeft(view);
+		addViewButtons.setCenter(remove);
 		addViewButtons.setRight(addExist);		
 		nameNbuttons.setLeft(usersName);
 		content.setTop(nameNbuttons);
@@ -81,22 +84,24 @@ public class MyPatients {
 		// setup buttons
 		URL imgURL = getClass().getResource("back.png");
 		backBtnContainer.setLeft(back);
-		back.setMinSize(70, 30);
+		back.setMinSize(50, 15);
 		back.setStyle("-fx-background-image: url('" + imgURL.toString() + "'); -fx-background-repeat: no-repeat;"
-				+ "  -fx-background-position: center; -fx-background-size: 68px 24px; ");
+				+ "  -fx-background-position: center; -fx-background-size: 48px 18px; ");
 		back.setOnAction(backClick);
 
 		view.setText("View");
 		view.setOnAction(viewClick);
-		addExist.setText("Add Existing");
-		
-		
+		remove.setOnAction(removeClick);
+		addExist.setOnAction(addClick);
 		//Setup styles
 		title.setStyle("-fx-font-size: 20px; -fx-background-color: rgb(200, 238, 242); -fx-text-align: center;");
 		nameNbuttons.setStyle("-fx-background-color: rgb(250, 250, 250)");
 		patients.setStyle("-fx-background-color: rgb(230, 238, 242)");
 		usersName.setFont(overall);
 		patientsList.setStyle("-fx-font-size: 15px");
+		
+		
+		
 		//Populating and setting display name for ListView of patients
 		patientsList.setCellFactory(new Callback<ListView<Patient>, ListCell<Patient>>() {
 		    @Override
@@ -128,7 +133,11 @@ public class MyPatients {
 		stage.show();
 
 	}
-
+	
+	//getter for the user doctor/practitioner
+	public Practitioner getUser() {
+		return user;
+	}
 	
 	//show stage
 	public void showStage(double _positionX, double _positionY) {
@@ -151,6 +160,8 @@ public class MyPatients {
 		
 	};
 	
+	
+	//View button action handler
 	EventHandler<ActionEvent> viewClick = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {
@@ -164,4 +175,37 @@ public class MyPatients {
 		}
 		
 	};
+	
+	
+	//Remove button action handler
+	EventHandler<ActionEvent> removeClick = new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+			try {
+				user.getPatients().remove(patientsList.getSelectionModel().getSelectedItem());
+				patientsList.getItems().clear();
+				for (Patient patient : user.getPatients()) {
+					patientsList.getItems().add(patient);
+
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+	};
+	
+	//Add button action handler
+		EventHandler<ActionEvent> addClick = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
+					stage.close();
+					MyPatientsAdd addingScreen = new MyPatientsAdd(sizeX, sizeY, stage.getX(), stage.getY(), user);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+		};
 }

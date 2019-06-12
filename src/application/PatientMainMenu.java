@@ -129,45 +129,6 @@ public class PatientMainMenu {
 
 		buttonArea.getChildren().addAll(timetable, tPlan, info, settings);
 
-//		buttonArea.setLeft(patientFind);
-//		buttonArea.setRight(myPatients);
-//		Font buttonFont = Font.font("Arial", FontWeight.BOLD,20);
-//		newPostItNote.setFont(buttonFont);
-//		newPostItNote.setTextFill(Color.GREY);
-//		newPostItNote.setStyle("-fx-background-color: transparent");
-//		deletePostItNote.setFont(buttonFont);
-//		deletePostItNote.setTextFill(Color.GREY);
-//		deletePostItNote.setStyle("-fx-background-color: transparent");
-//		newPostItNote.setOnAction(newButton);
-//		deletePostItNote.setOnAction(closeButton);
-
-		// replacing the right click menu with custom
-//		textArea.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
-//		textArea.setOnMouseClicked(rightClick);
-//
-//		rightClickMenu = new ContextMenu();
-//		MenuItem cut = new MenuItem("Cut");
-//		rightClickMenu.getItems().add(cut);
-//		MenuItem copy = new MenuItem("Copy");
-//		rightClickMenu.getItems().add(copy);
-//		MenuItem paste = new MenuItem("Paste");
-//		rightClickMenu.getItems().add(paste);
-//		MenuItem about = new MenuItem("About");
-//		rightClickMenu.getItems().add(about);
-//		MenuItem exit = new MenuItem("Exit");
-//		rightClickMenu.getItems().add(exit);
-//
-//		exit.setOnAction(closeButton);
-//		paste.setOnAction(pasteButton);
-//		copy.setOnAction(copyButton);
-//		cut.setOnAction(cutButton);
-//		about.setOnAction(aboutButton);
-
-		// setup custom resize and move fucntions
-
-//		buttonArea.setOnMousePressed(clickContent);		 
-//		buttonArea.setOnMouseDragged(dragContent);
-//		buttonArea.setOnMouseReleased(hoverExit);
 
 		// setup and show scene
 		scene = new Scene(content, sizeX, sizeY);
@@ -176,6 +137,16 @@ public class PatientMainMenu {
 		
 	}
 
+	
+
+	//show stage
+	public void showStage(double _positionX, double _positionY) {
+		positionX = _positionX;
+		positionY = _positionY;
+		buildUpStage();
+	}
+	
+	
 	// EVENT HANDLERS
 	
 	// Treatment plan setup mouse click
@@ -201,8 +172,6 @@ public class PatientMainMenu {
 			public void handle(MouseEvent e) {
 				if (e.getButton() == MouseButton.PRIMARY) {
 					try {
-//								MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
-						stage.close();
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}

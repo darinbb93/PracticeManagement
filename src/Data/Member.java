@@ -16,8 +16,17 @@ public abstract class Member {
 	protected String email;
 	protected String phone;	
 	protected Date dob;
+	protected String gender;
 	
 	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public Date getDob() {
 		return dob;
 	}

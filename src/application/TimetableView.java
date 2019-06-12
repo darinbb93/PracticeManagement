@@ -4,13 +4,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.script.Bindings;
-import javax.script.SimpleBindings;
-
-import Data.Appointment;
-import Data.Patient;
-import Data.Practitioner;
+import Data.*;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,7 +29,11 @@ import javafx.util.Callback;
 import javafx.animation.Animation;
 import javafx.animation.Transition;
 import javafx.util.Duration;
-
+/**
+ * 
+ * @author Tianyi Fu - fuyty006
+ *
+ */
 public class TimetableView {
 
 	private double sizeX;
@@ -56,7 +53,6 @@ public class TimetableView {
             setAutoReverse(true);
         }
         protected void interpolate(double frac) {
-        	System.out.println(frac);
             final int length = content.length();
             final int n = Math.round(length * (float) frac);
             text.setText(content.substring(0, n));
@@ -66,7 +62,7 @@ public class TimetableView {
     private final TableView<Appointment> table = new TableView<>();
     private final ObservableList<Appointment> data
             = FXCollections.observableArrayList(
-                    new Appointment("Jacob", "Smith","3","4",true,new Date(),new Patient("JS", null, null, null, null, null, null, null),new Practitioner("SJdocter", null, null, null, null, null, null, null, null, null)),
+                    new Appointment("Jacob", "Smith","3","4",true,new Date(),new Patient("JS", null, null, null, null, null, null, null,null),new Practitioner("SJdocter", null, null, null, null, null, null, null, null, null, null)),
                     new Appointment("Isabella", "Johnson","3","4",true,new Date(),null,null),
                     new Appointment("Ethan", "Williams","3","4",true,new Date(),null,null),
                     new Appointment("Emma", "Jones","3","4",true,new Date(),null,null),
@@ -276,7 +272,7 @@ public class TimetableView {
 				        addfuture.getText(),
 				        true,
 				        ft.parse(adddate.getText()),
-				        new Patient(addpatient.getText(), null, null, null, null, null, null, null),
+				        new Patient(addpatient.getText(), null, null, null, null, null, null, null, null),
 				        user
 				        ));
 			} catch (ParseException e1) {
@@ -313,9 +309,9 @@ public class TimetableView {
 		// setup buttons
 		URL imgURL = getClass().getResource("back.png");
 		backBtnContainer.setLeft(back);
-		back.setMinSize(70, 30);
+		back.setMinSize(50, 15);
 		back.setStyle("-fx-background-image: url('" + imgURL.toString() + "'); -fx-background-repeat: no-repeat;"
-				+ "  -fx-background-position: center; -fx-background-size: 68px 24px; ");
+				+ "  -fx-background-position: center; -fx-background-size: 48px 18px; ");
 		back.setOnAction(backClick);
     	
 

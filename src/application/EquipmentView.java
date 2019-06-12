@@ -95,9 +95,9 @@ public class EquipmentView {
 		// setup buttons and search
 		URL imgURL = getClass().getResource("back.png");
 		backBtnContainer.setLeft(back);
-		back.setMinSize(70, 30);
+		back.setMinSize(50, 15);
 		back.setStyle("-fx-background-image: url('" + imgURL.toString() + "'); -fx-background-repeat: no-repeat;"
-				+ "  -fx-background-position: center; -fx-background-size: 68px 24px; ");
+				+ "  -fx-background-position: center; -fx-background-size: 48px 18px; ");
 		back.setOnAction(backClick);
 		search.setOnKeyReleased(searching);
 
@@ -218,7 +218,9 @@ public class EquipmentView {
 		}
 
 	};
-
+	
+	
+	//Lend button action handler
 	EventHandler<ActionEvent> lendClicked = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {
@@ -232,7 +234,9 @@ public class EquipmentView {
 		}
 
 	};
-
+	
+	
+	//Return button action handler
 	EventHandler<ActionEvent> returnedClicked = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {
@@ -247,6 +251,7 @@ public class EquipmentView {
 
 	};
 
+	//Key listening event which fills the table with the search results
 	EventHandler<KeyEvent> searching = new EventHandler<KeyEvent>() {
 		@Override
 		public void handle(KeyEvent e) {

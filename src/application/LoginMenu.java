@@ -41,7 +41,7 @@ public class LoginMenu {
 	private Button signup;
 	private Stage stage;
 	private Scene scene;
-
+	
 	public LoginMenu(double _sizeX, double _sizeY, double _positionX, double _positionY) {
 
 		sizeX = _sizeX;
@@ -166,7 +166,9 @@ public class LoginMenu {
 			}
 		}
 	};
-
+	
+	
+	//SignUp action handler
 	EventHandler<ActionEvent> signUpAction = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {

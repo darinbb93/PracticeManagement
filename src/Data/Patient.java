@@ -19,7 +19,7 @@ public class Patient extends Member {
 	private ArrayList<Treatment> tPlan = new ArrayList<Treatment>();
 	
 	public Patient(String _username, String _password, String _name, String _address, 
-			String _email, String _phone, Date _dob, String _medicare) {
+			String _email, String _phone, Date _dob, String _medicare, String _gender) {
 		
 		username = _username;
 		password = _password;
@@ -29,6 +29,7 @@ public class Patient extends Member {
 		phone = _phone;
 		dob = _dob;	
 		medicare = _medicare;
+		gender = _gender;
 	}
 	
 	public String getMedicare() {

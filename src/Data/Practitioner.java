@@ -18,17 +18,22 @@ public class Practitioner extends Member {
 	private String skills;	
 	private String licenseID;
 	private ArrayList<Patient> patients = new ArrayList<Patient>();
+	private ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+	public ArrayList<Appointment> getAppointments() {
+		return appointments;
+	}
 	public Specs specialise; 	
 	public enum Specs {GENERAL, ONCOLOGY, WOMENS_HEALTH, CARDIO, ASSISSTANT}
 	
 
 	public Practitioner(String _username, String _password, String _name, String _address, 
 			String _email, String _phone, Date _dob, String _education, 
-			String _skills, String _licenseID) {
+			String _skills, String _licenseID, String _gender) {
 		
 		username = _username;
 		password = _password;
 		name = _name;
+		gender = _gender;
 		address = _address;
 		email = _email;
 		phone = _phone;

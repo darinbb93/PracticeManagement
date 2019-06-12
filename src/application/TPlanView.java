@@ -32,6 +32,10 @@ public class TPlanView {
 	private PatientOptionsMenu prevMenuDoc;
 	
 	
+	//Previous menu getter for doctors
+	public PatientOptionsMenu getPrevMenuDoc() {
+		return prevMenuDoc;
+	}
 	
 	public TPlanView(double _sizeX, double _sizeY, double _positionX, double _positionY, Patient _thePatient,PatientOptionsMenu _prevMenuDoc, boolean _doctorView) {
 
@@ -85,15 +89,17 @@ public class TPlanView {
 		// setup buttons
 		URL imgURL = getClass().getResource("back.png");
 		backBtnContainer.setLeft(back);
-		back.setMinSize(70, 30);
+		back.setMinSize(50, 15);
 		back.setStyle("-fx-background-image: url('" + imgURL.toString() + "'); -fx-background-repeat: no-repeat;"
-				+ "  -fx-background-position: center; -fx-background-size: 68px 24px; ");
+				+ "  -fx-background-position: center; -fx-background-size: 48px 18px; ");
 		back.setOnAction(backClick);
 
 		view.setText("View");
 		view.setOnAction(viewClick);
 		addNew.setText("Add new");
+		addNew.setOnAction(addClick);
 		remove.setText("Remove");
+		remove.setOnAction(removeClick);
 		
 		//Setup styles
 		title.setStyle("-fx-font-size: 20px; -fx-background-color: rgb(200, 238, 242); -fx-text-align: center;");
@@ -101,14 +107,15 @@ public class TPlanView {
 		patients.setStyle("-fx-background-color: rgb(230, 238, 242)");
 		usersName.setFont(overall);
 		tPLan.setStyle("-fx-font-size: 15px");
-
-		//setup username display and add button based on what is the user of the page 
-
+//		tPLan.getSelectionModel().i
+		
+		//populate tPlan list
 		for (Treatment treatment : thePatient.gettPlan()) {
 			tPLan.getItems().add(treatment);
 
 		}
 		
+		//setup add/remove button if doctor viewing page		
 		if(doctorView) {
 			addViewButtons.setRight(addNew);		
 			addViewButtons.setCenter(remove);
@@ -132,7 +139,7 @@ public class TPlanView {
 		buildUpStage();
 	}
 	
-	// Back button click setup
+	// Back button action handler
 	EventHandler<ActionEvent> backClick = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {
@@ -151,17 +158,49 @@ public class TPlanView {
 		
 	};
 	
+	//view button action handler
 	EventHandler<ActionEvent> viewClick = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent e) {
-			try {
-//				PatientOptionsMenu mainMenu = new PatientOptionsMenu(sizeX, sizeY, 
-//						stage.getX(), stage.getY(), patientsList.getSelectionModel().getSelectedItem(), self);
+			try {				
 				stage.close();
+				TBlockView viewBlock = new TBlockView(sizeX, sizeY, stage.getX(), stage.getY(), thePatient, self, tPLan.getSelectionModel().getSelectedItem());
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}
 		
 	};
+	
+	//Add button action handler
+		EventHandler<ActionEvent> addClick = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {				
+					stage.close();
+					TBlockAdd viewBlock = new TBlockAdd(sizeX, sizeY, stage.getX(), stage.getY(), thePatient, self);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+		};
+		
+		//Remove button action handler
+		EventHandler<ActionEvent> removeClick = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {	
+					thePatient.gettPlan().remove(tPLan.getSelectionModel().getSelectedItem());
+					tPLan.getItems().clear();
+					for (Treatment treatment : thePatient.gettPlan()) {
+						tPLan.getItems().add(treatment);
+
+					}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+		};
 }
