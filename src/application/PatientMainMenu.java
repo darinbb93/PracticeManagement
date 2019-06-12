@@ -15,12 +15,14 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
-/**	
- * This class represents and builds the Main Menu for patients.
- * It presents them with options to go to setting, view their 
- * appointments time table view their treatment plan and book emergency appointment.
- * @author Darin Bogdanov  - bogdb001
- *	
+
+/**
+ * This class represents and builds the Main Menu for patients. It presents them
+ * with options to go to setting, view their appointments time table view their
+ * treatment plan and book emergency appointment.
+ * 
+ * @author Darin Bogdanov - bogdb001
+ * 
  */
 public class PatientMainMenu {
 	private double sizeX;
@@ -38,6 +40,8 @@ public class PatientMainMenu {
 	private Scene scene;
 	private Patient user;
 	URL imgURL;
+	private HBox emergency;
+	private HBox txt2speech;
 
 	public PatientMainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Patient _user) {
 
@@ -68,7 +72,6 @@ public class PatientMainMenu {
 		// Assigned font for all texts
 		Font overall = Font.font("Aral", 20);
 
-		
 		content = new BorderPane();
 		buttonArea = new VBox();
 		usersName = new Text(user.getName());
@@ -86,7 +89,6 @@ public class PatientMainMenu {
 
 //Buttons setup as HBox with an image component and Text 
 
-
 		// time Table
 		timetable = new HBox();
 		imgURL = getClass().getResource("tTable50.png");
@@ -95,7 +97,7 @@ public class PatientMainMenu {
 		Text tTblTXT = new Text("Timetable");
 		tTblTXT.setFont(overall);
 		timetable.getChildren().addAll(tTblIMG_VIEW, tTblTXT);
-		
+
 		// Treatment Plan view link
 		tPlan = new HBox();
 		imgURL = getClass().getResource("tPlan50.png");
@@ -105,7 +107,7 @@ public class PatientMainMenu {
 		tPlanTXT.setFont(overall);
 		tPlan.getChildren().addAll(tPlanIMG_VIEW, tPlanTXT);
 		tPlan.setOnMouseClicked(tPlanClick);
-		
+
 		// settings
 		settings = new HBox();
 		imgURL = getClass().getResource("stngs50.png");
@@ -113,8 +115,27 @@ public class PatientMainMenu {
 		ImageView stngsIMG_VIEW = new ImageView(stngsIMG);
 		Text stngsTXT = new Text("Settings");
 		stngsTXT.setFont(overall);
-		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);		
-	
+		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);
+
+		// Patient info view link
+		emergency = new HBox();
+		imgURL = getClass().getResource("emergency50.png");
+		Image emergencyIMG = new Image(imgURL.toString());
+		ImageView emergencyIMG_VIEW = new ImageView(emergencyIMG);
+		Text emergencyTXT = new Text("Emergency");
+		emergencyTXT.setFont(overall);
+		emergency.getChildren().addAll(emergencyIMG_VIEW, emergencyTXT);
+		emergency.setOnMouseClicked(emergencyClick);
+
+		// Patient info view link
+		txt2speech = new HBox();
+		imgURL = getClass().getResource("txt2speech50.png");
+		Image txt2speechIMG = new Image(imgURL.toString());
+		ImageView txt2speechIMG_VIEW = new ImageView(txt2speechIMG);
+		Text txt2speechTXT = new Text("Text to Speech");
+		txt2speechTXT.setFont(overall);
+		txt2speech.getChildren().addAll(txt2speechIMG_VIEW, txt2speechTXT);
+		txt2speech.setOnMouseClicked(txt2speechClicked);
 
 		// Patient info view link
 		info = new HBox();
@@ -125,30 +146,25 @@ public class PatientMainMenu {
 		infoTXT.setFont(overall);
 		info.getChildren().addAll(infoIMG_VIEW, infoTXT);
 		info.setOnMouseClicked(infoClick);
-		
 
-		buttonArea.getChildren().addAll(timetable, tPlan, info, settings);
-
+		buttonArea.getChildren().addAll(timetable, tPlan, info, emergency, txt2speech, settings);
 
 		// setup and show scene
 		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-		
+
 	}
 
-	
-
-	//show stage
+	// show stage
 	public void showStage(double _positionX, double _positionY) {
 		positionX = _positionX;
 		positionY = _positionY;
 		buildUpStage();
 	}
-	
-	
+
 	// EVENT HANDLERS
-	
+
 	// Treatment plan setup mouse click
 	EventHandler<MouseEvent> tPlanClick = new EventHandler<MouseEvent>() {
 		@Override
@@ -165,19 +181,51 @@ public class PatientMainMenu {
 
 		}
 	};
-	
-	// Patient Details mouse click
-		EventHandler<MouseEvent> infoClick = new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				if (e.getButton() == MouseButton.PRIMARY) {
-					try {
-					} catch (Exception e2) {
-						e2.printStackTrace();
-					}
-				}
 
+	// Patient Details mouse click
+	EventHandler<MouseEvent> infoClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
 			}
-		};
+
+		}
+	};
+
+	// Emergency mouse click
+	EventHandler<MouseEvent> emergencyClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.close();
+					emergencyAppointment emergency = new emergencyAppointment(sizeX, sizeY, stage.getX(), stage.getY(), user);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
 	
+	// Txt2speech mouse click
+	EventHandler<MouseEvent> txt2speechClicked = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.close();
+					textToSpeech text2Speech = new textToSpeech(sizeX, sizeY, stage.getX(), stage.getY());
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
 }

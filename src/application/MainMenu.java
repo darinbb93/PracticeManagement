@@ -15,14 +15,15 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
-/**	
+
+/**
  * This class represents and builds the Main Menu that doctors would see when
- * they login and where they can navigate to see their pateints,see all
- * patients signed up to the hospital, see their timetable, change some setting 
- * and change some settings
+ * they login and where they can navigate to see their pateints,see all patients
+ * signed up to the hospital, see their timetable, change some setting and
+ * change some settings
  * 
- * @author Darin Bogdanov  - bogdb001
- *	
+ * @author Darin Bogdanov - bogdb001
+ * 
  */
 public class MainMenu {
 	private double sizeX;
@@ -72,7 +73,6 @@ public class MainMenu {
 		// Assigned font for all texts
 		Font overall = Font.font("Aral", 20);
 
-		
 		content = new BorderPane();
 		buttonArea = new VBox();
 		usersName = new Text(user.getName());
@@ -108,7 +108,8 @@ public class MainMenu {
 		Text pFindTXT = new Text("Find Patient");
 		pFindTXT.setFont(overall);
 		patientFind.getChildren().addAll(pFindIMG_VIEW, pFindTXT);
-
+		patientFind.setOnMouseClicked(findClick);
+		
 		// time Table view link
 		timetable = new HBox();
 		imgURL = getClass().getResource("tTable50.png");
@@ -117,6 +118,7 @@ public class MainMenu {
 		Text tTblTXT = new Text("Timetable");
 		tTblTXT.setFont(overall);
 		timetable.getChildren().addAll(tTblIMG_VIEW, tTblTXT);
+		timetable.setOnMouseClicked(timeTableClick);
 
 		// settings menu link
 		settings = new HBox();
@@ -126,7 +128,8 @@ public class MainMenu {
 		Text stngsTXT = new Text("Settings");
 		stngsTXT.setFont(overall);
 		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);
-
+		settings.setOnMouseClicked(settingsClick);
+		
 		// New Patient sign up menu link
 		newP = new HBox();
 		imgURL = getClass().getResource("new50.png");
@@ -139,24 +142,23 @@ public class MainMenu {
 
 		buttonArea.getChildren().addAll(myPatients, patientFind, timetable, settings, newP);
 
-
 		// setup and show scene
 		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-		
+
 	}
 
-	//show stage
+	// show stage
 	public void showStage(double _positionX, double _positionY) {
 		positionX = _positionX;
 		positionY = _positionY;
 		buildUpStage();
 	}
-	
+
 	// EVENT HANDLERS
 
-	//Mouse click setup for My patients  
+	// Mouse click setup for My patients
 	EventHandler<MouseEvent> myPatientsClick = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent e) {
@@ -171,8 +173,8 @@ public class MainMenu {
 
 		}
 	};
-	
-	//Mouse click setup for New patient
+
+	// Mouse click setup for New patient
 	EventHandler<MouseEvent> newPClicked = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent e) {
@@ -187,6 +189,49 @@ public class MainMenu {
 
 		}
 	};
+
+	EventHandler<MouseEvent> settingsClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.hide();
+					SettingsView settingsView = new SettingsView(sizeX, sizeY, stage.getX(), stage.getY(), user, self);			
+					} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
+
+	EventHandler<MouseEvent> findClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.hide();
+					SearchView search = new SearchView(sizeX, sizeY, stage.getX(), stage.getY(), user);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
 	
-	
+	EventHandler<MouseEvent> timeTableClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.hide();
+					TimetableView timetable = new TimetableView(sizeX, sizeY, stage.getX(), stage.getY(), user);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
 }

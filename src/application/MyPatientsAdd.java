@@ -167,7 +167,7 @@ public class MyPatientsAdd {
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
-			}
+			}			
 			
 		};
 }

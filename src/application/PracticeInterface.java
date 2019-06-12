@@ -20,7 +20,9 @@ public class PracticeInterface extends Application {
 			//debugging code
 			
 			Practitioner doctor = (Practitioner)database.getMembers().get(1);
-			MainMenu mm = new MainMenu(300, 600, 10, 20, doctor);
+			Patient pat = doctor.getPatients().get(1);
+//			MainMenu mm = new MainMenu(300, 600, 10, 20, doctor);
+			PatientMainMenu pmenu = new PatientMainMenu(250, 450, 10, 20, pat);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

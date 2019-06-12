@@ -30,8 +30,6 @@ public class LoginMenu {
 	private double sizeY;
 	private double positionX;
 	private double positionY;
-	private double xOffset;
-	private double yOffset;
 	private BorderPane content;
 	private VBox loginDetails;
 	private TextField username;

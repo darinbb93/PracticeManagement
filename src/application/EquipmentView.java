@@ -112,7 +112,6 @@ public class EquipmentView {
 		toReturn.setMaxHeight(50);
 
 		//ANIMATING LIST VIEW
-//		eqList.setCellFactory(AnimatedListCell.forListView(AnimationType.ROTATE_RIGHT, AnimationType.FADE_OUT))
 		
 		
 		// check if any items are borrowed create returns list

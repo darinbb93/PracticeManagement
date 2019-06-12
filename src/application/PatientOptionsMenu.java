@@ -74,14 +74,9 @@ public class PatientOptionsMenu {
 		BorderPane nameNbuttons = new BorderPane();
 		BorderPane backBtnContainer = new BorderPane();
 		Button back = new Button();
-		BorderPane addViewButtons = new BorderPane();
-		Button view = new Button();
-		Button addExist = new Button();
 		subContent.setTop(backBtnContainer);
 		subContent.setCenter(centering);
 		centering.getChildren().add(patientOptions);
-		addViewButtons.setLeft(view);
-		addViewButtons.setRight(addExist);
 		nameNbuttons.setLeft(usersName);
 		content.setTop(nameNbuttons);
 		content.setCenter(subContent);
@@ -134,54 +129,12 @@ public class PatientOptionsMenu {
 		// adding content to center of content border pane
 		patientOptions.getChildren().addAll(equipment, tPlan, info);
 
-//		buttonArea.setLeft(patientFind);
-//		buttonArea.setRight(myPatients);
-//		Font buttonFont = Font.font("Arial", FontWeight.BOLD,20);
-//		newPostItNote.setFont(buttonFont);
-//		newPostItNote.setTextFill(Color.GREY);
-//		newPostItNote.setStyle("-fx-background-color: transparent");
-//		deletePostItNote.setFont(buttonFont);
-//		deletePostItNote.setTextFill(Color.GREY);
-//		deletePostItNote.setStyle("-fx-background-color: transparent");
-//		newPostItNote.setOnAction(newButton);
-//		deletePostItNote.setOnAction(closeButton);
-
-		// replacing the right click menu with custom
-//		textArea.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
-//		textArea.setOnMouseClicked(rightClick);
-//
-//		rightClickMenu = new ContextMenu();
-//		MenuItem cut = new MenuItem("Cut");
-//		rightClickMenu.getItems().add(cut);
-//		MenuItem copy = new MenuItem("Copy");
-//		rightClickMenu.getItems().add(copy);
-//		MenuItem paste = new MenuItem("Paste");
-//		rightClickMenu.getItems().add(paste);
-//		MenuItem about = new MenuItem("About");
-//		rightClickMenu.getItems().add(about);
-//		MenuItem exit = new MenuItem("Exit");
-//		rightClickMenu.getItems().add(exit);
-//
-//		exit.setOnAction(closeButton);
-//		paste.setOnAction(pasteButton);
-//		copy.setOnAction(copyButton);
-//		cut.setOnAction(cutButton);
-//		about.setOnAction(aboutButton);
-
-		// setup custom resize and move fucntions
-
-//		buttonArea.setOnMousePressed(clickContent);		 
-//		buttonArea.setOnMouseDragged(dragContent);
-//		buttonArea.setOnMouseReleased(hoverExit);
 
 		// setup and show scene
 		scene = new Scene(content, sizeX, sizeY);
 		stage.setScene(scene);
 		stage.show();
-		// following code must remain below "stage.show()" in order to properly
-		// modify background color for the "textArea" casting it to a "Region"
-//		Region region = (Region) textArea.lookup(".content");
-//		region.setStyle( "-fx-background-color: rgb(253, 253, 201)" );
+
 	}
 
 	// show stage
@@ -236,8 +189,8 @@ public class PatientOptionsMenu {
 		public void handle(MouseEvent e) {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				try {
-//							MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
 					stage.close();
+					PatientDetailsView pDetails = new PatientDetailsView(sizeX, sizeY, stage.getX(), stage.getY(), thePatient, prevMenu.getUser());
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
