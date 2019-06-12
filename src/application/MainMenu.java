@@ -40,6 +40,7 @@ public class MainMenu {
 	private Text usersName;
 	private Scene scene;
 	private Practitioner user;
+	SettingsView settingsView;
 	URL imgURL;
 
 	public MainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Practitioner _user) {
@@ -49,9 +50,16 @@ public class MainMenu {
 		positionX = _positionX;
 		positionY = _positionY;
 		user = _user;
+		
+		settingsView = new SettingsView(_sizeX, _sizeY, _positionX, _positionY, _user, this);
+		
 
 		buildUpStage();
 
+	}
+	
+	public void showStage() {
+		this.stage.show();
 	}
 
 	// creates the scene and all elements, adds to stage and shows it
@@ -107,6 +115,7 @@ public class MainMenu {
 		Text pFindTXT = new Text("Find Patient");
 		pFindTXT.setFont(overall);
 		patientFind.getChildren().addAll(pFindIMG_VIEW, pFindTXT);
+		patientFind.setOnMouseClicked(findClick);
 
 		// time Table view link
 		timetable = new HBox();
@@ -125,6 +134,7 @@ public class MainMenu {
 		Text stngsTXT = new Text("Settings");
 		stngsTXT.setFont(overall);
 		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);
+		settings.setOnMouseClicked(settingsClick);
 
 		// New Patient sign up menu link
 		newP = new HBox();
@@ -194,6 +204,36 @@ public class MainMenu {
 				try {
 					stage.close();
 					MyPatients patientsMenu = new MyPatients(sizeX, sizeY, stage.getX(), stage.getY(), user);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
+	
+	EventHandler<MouseEvent> settingsClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.hide();
+					settingsView.showStage();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+	};
+	
+	EventHandler<MouseEvent> findClick = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent e) {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				try {
+					stage.hide();
+					SearchView search = new SearchView(sizeX, sizeY, stage.getX(), stage.getY(), user);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
