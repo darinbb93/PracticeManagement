@@ -42,6 +42,7 @@ public class PatientMainMenu {
 	URL imgURL;
 	private HBox emergency;
 	private HBox txt2speech;
+	private PatientMainMenu self = this;
 
 	public PatientMainMenu(double _sizeX, double _sizeY, double _positionX, double _positionY, Patient _user) {
 
@@ -108,16 +109,16 @@ public class PatientMainMenu {
 		tPlan.getChildren().addAll(tPlanIMG_VIEW, tPlanTXT);
 		tPlan.setOnMouseClicked(tPlanClick);
 
-		// settings
-		settings = new HBox();
-		imgURL = getClass().getResource("stngs50.png");
-		Image stngsIMG = new Image(imgURL.toString());
-		ImageView stngsIMG_VIEW = new ImageView(stngsIMG);
-		Text stngsTXT = new Text("Settings");
-		stngsTXT.setFont(overall);
-		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);
+		// settings - to be done
+//		settings = new HBox();
+//		imgURL = getClass().getResource("stngs50.png");
+//		Image stngsIMG = new Image(imgURL.toString());
+//		ImageView stngsIMG_VIEW = new ImageView(stngsIMG);
+//		Text stngsTXT = new Text("Settings");
+//		stngsTXT.setFont(overall);
+//		settings.getChildren().addAll(stngsIMG_VIEW, stngsTXT);
 
-		// Patient info view link
+		// Emergency view link
 		emergency = new HBox();
 		imgURL = getClass().getResource("emergency50.png");
 		Image emergencyIMG = new Image(imgURL.toString());
@@ -127,7 +128,7 @@ public class PatientMainMenu {
 		emergency.getChildren().addAll(emergencyIMG_VIEW, emergencyTXT);
 		emergency.setOnMouseClicked(emergencyClick);
 
-		// Patient info view link
+		// Txt2Speech view link
 		txt2speech = new HBox();
 		imgURL = getClass().getResource("txt2speech50.png");
 		Image txt2speechIMG = new Image(imgURL.toString());
@@ -137,17 +138,17 @@ public class PatientMainMenu {
 		txt2speech.getChildren().addAll(txt2speechIMG_VIEW, txt2speechTXT);
 		txt2speech.setOnMouseClicked(txt2speechClicked);
 
-		// Patient info view link
-		info = new HBox();
-		imgURL = getClass().getResource("info50.png");
-		Image infoIMG = new Image(imgURL.toString());
-		ImageView infoIMG_VIEW = new ImageView(infoIMG);
-		Text infoTXT = new Text("Patient Details");
-		infoTXT.setFont(overall);
-		info.getChildren().addAll(infoIMG_VIEW, infoTXT);
-		info.setOnMouseClicked(infoClick);
+		// Patient info view link to be done
+//		info = new HBox();
+//		imgURL = getClass().getResource("info50.png");
+//		Image infoIMG = new Image(imgURL.toString());
+//		ImageView infoIMG_VIEW = new ImageView(infoIMG);
+//		Text infoTXT = new Text("Patient Details");
+//		infoTXT.setFont(overall);
+//		info.getChildren().addAll(infoIMG_VIEW, infoTXT);
+//		info.setOnMouseClicked(infoClick);
 
-		buttonArea.getChildren().addAll(timetable, tPlan, info, emergency, txt2speech, settings);
+		buttonArea.getChildren().addAll(timetable, tPlan, emergency, txt2speech);
 
 		// setup and show scene
 		scene = new Scene(content, sizeX, sizeY);
@@ -215,12 +216,14 @@ public class PatientMainMenu {
 	
 	// Txt2speech mouse click
 	EventHandler<MouseEvent> txt2speechClicked = new EventHandler<MouseEvent>() {
+
+
 		@Override
 		public void handle(MouseEvent e) {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				try {
 					stage.close();
-					textToSpeech text2Speech = new textToSpeech(sizeX, sizeY, stage.getX(), stage.getY());
+					textToSpeech text2Speech = new textToSpeech(sizeX, sizeY, stage.getX(), stage.getY(), self);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}

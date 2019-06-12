@@ -44,9 +44,11 @@ public class textToSpeech {
 	private double positionY;
 	private Stage stage;
 	private Scene scene;
-
-	public textToSpeech(double _sizeX, double _sizeY, double _positionX, double _positionY) {
-
+	private PatientMainMenu prevMenu;
+	
+	public textToSpeech(double _sizeX, double _sizeY, double _positionX, double _positionY, PatientMainMenu _prevMenu) {
+		
+		prevMenu = _prevMenu;
 		sizeX = _sizeX;
 		sizeY = _sizeY;
 		positionX = _positionX;
@@ -134,12 +136,12 @@ public class textToSpeech {
 		Button back = new Button("Back");
 		back.setStyle("-fx-font: 12 arial; -fx-base: #b6e7c9;");
 
-		/**
-		 * PLEASE DONT FORGET TO EDIT THIS BIT
-		 */
-		// Write the name of the scene you want to go back to in place of
-		// NAME_OF_THE_SCENE
-		// back.setOnAction(e -> stage.setScene(NAME_OF_THE_SCENE));
+	
+		 back.setOnAction(e -> {
+			 stage.close();
+			 prevMenu.showStage(stage.getX(),stage.getY());
+			 
+		 });
 
 		Button save = new Button("Save");
 		save.setStyle("-fx-font: 12 arial; -fx-base: #b6e7c9;");
@@ -220,7 +222,7 @@ public class textToSpeech {
 		root.getChildren().addAll(speedLabel, speed, speedValue);
 		root.getChildren().addAll(languageLabel, languages);
 		root.getChildren().addAll(accentLabel, accent);
-		root.getChildren().add(btmButtons);
+		root.getChildren().addAll(save, back);
 		// root.getChildren().add(save);
 
 		stage.setTitle("Text-To-Speech");
